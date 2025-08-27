@@ -1,19 +1,12 @@
-import Navigation from '@/components/portfolio/Navigation';
-import HeroSection from '@/components/portfolio/HeroSection';
-import AboutSection from '@/components/portfolio/AboutSection';
-import ProjectsSection from '@/components/portfolio/ProjectsSection';
-import ExperienceSection from '@/components/portfolio/ExperienceSection';
-import ContactSection from '@/components/portfolio/ContactSection';
+// Update this page (the content is just a fallback if you fail to update the page)
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      <HeroSection />
-      <AboutSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <ContactSection />
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
+        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+      </div>
     </div>
   );
 };

@@ -1,37 +1,31 @@
 import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
 const HeroSection = () => {
-  const socialLinks = [
-    {
-      icon: Github,
-      label: 'GitHub',
-      href: 'https://github.com/StevenDreamer1',
-      color: 'hover:text-text-primary'
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://linkedin.com/in/palepustephen',
-      color: 'hover:text-primary'
-    },
-    {
-      icon: Mail,
-      label: 'Email',
-      href: 'mailto:stifen0000@gmail.com',
-      color: 'hover:text-accent'
-    }
-  ];
-
+  const socialLinks = [{
+    icon: Github,
+    label: 'GitHub',
+    href: 'https://github.com/StevenDreamer1',
+    color: 'hover:text-text-primary'
+  }, {
+    icon: Linkedin,
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/palepustephen',
+    color: 'hover:text-primary'
+  }, {
+    icon: Mail,
+    label: 'Email',
+    href: 'mailto:stifen0000@gmail.com',
+    color: 'hover:text-accent'
+  }];
   const scrollToAbout = () => {
     const element = document.getElementById('about');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+  return <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Animated gradient background */}
       <div className="absolute inset-0 gradient-hero opacity-10"></div>
       
@@ -45,9 +39,7 @@ const HeroSection = () => {
 
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <div className="mb-8">
-          <h1 className="text-5xl md:text-7xl font-bold text-text-primary mb-4">
-            P. Stephen
-          </h1>
+          <h1 className="text-5xl md:text-7xl font-bold text-text-primary mb-4">Palepu Stephen</h1>
           <div className="text-xl md:text-2xl text-text-secondary mb-6 font-medium">
             <span className="text-primary">AI/ML Enthusiast</span> | 
             <span className="text-secondary"> UI/UX Designer</span> | 
@@ -63,25 +55,13 @@ const HeroSection = () => {
 
         {/* Social Links */}
         <div className="flex justify-center space-x-6 mb-12">
-          {socialLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`p-3 rounded-full bg-card shadow-card transition-spring ${link.color} border border-card-border hover:shadow-hover hover:scale-110`}
-              aria-label={link.label}
-            >
+          {socialLinks.map((link, index) => <a key={index} href={link.href} target="_blank" rel="noopener noreferrer" className={`p-3 rounded-full bg-card shadow-card transition-spring ${link.color} border border-card-border hover:shadow-hover hover:scale-110`} aria-label={link.label}>
               <link.icon size={24} />
-            </a>
-          ))}
+            </a>)}
         </div>
 
         {/* CTA Button */}
-        <Button
-          onClick={scrollToAbout}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-medium rounded-xl shadow-card hover:shadow-hover transition-spring group"
-        >
+        <Button onClick={scrollToAbout} className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-medium rounded-xl shadow-card hover:shadow-hover transition-spring group">
           Explore My Work
           <ArrowDown className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-smooth" />
         </Button>
@@ -93,8 +73,6 @@ const HeroSection = () => {
           <ArrowDown className="w-6 h-6 text-text-light" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;

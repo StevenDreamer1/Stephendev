@@ -43,7 +43,7 @@ const HeroSection = () => {
           <div className="text-xl md:text-2xl text-text-secondary mb-6 font-medium">
             <span className="text-primary">AI/ML Enthusiast</span> | 
             <span className="text-secondary"> UI/UX Designer</span> | 
-            <span className="text-accent"> Problem Solver</span>
+            <span className="text-accent"> Web Developer</span>
           </div>
         </div>
 

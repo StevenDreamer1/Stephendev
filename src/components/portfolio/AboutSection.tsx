@@ -38,8 +38,15 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-subtle">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="about" className="py-20 relative overflow-hidden">
+      {/* Background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(/hero-background.png)` }}
+      ></div>
+      <div className="absolute inset-0 backdrop-blur-sm bg-background/40"></div>
+      <div className="absolute inset-0 bg-gradient-subtle opacity-60"></div>
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
             About Me

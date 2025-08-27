@@ -46,8 +46,14 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="contact" className="py-20 relative overflow-hidden">
+      {/* Background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(/hero-background.png)` }}
+      ></div>
+      <div className="absolute inset-0 backdrop-blur-sm bg-background/50"></div>
+      <div className="relative z-10 max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
             Let's Connect

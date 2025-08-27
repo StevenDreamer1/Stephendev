@@ -26,8 +26,17 @@ const HeroSection = () => {
     }
   };
   return <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Hero background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(/hero-background.png)` }}
+      ></div>
+      
+      {/* Blur overlay */}
+      <div className="absolute inset-0 backdrop-blur-sm bg-background/30"></div>
+      
       {/* Animated gradient background */}
-      <div className="absolute inset-0 gradient-hero opacity-10"></div>
+      <div className="absolute inset-0 gradient-hero opacity-20"></div>
       
       {/* Floating particles effect */}
       <div className="absolute inset-0">

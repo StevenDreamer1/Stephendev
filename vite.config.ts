@@ -19,4 +19,22 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // We are externalizing 'three', so optimizeDeps won't be strictly necessary for the build,
+  // but keeping it for potential local dev benefits.
+  optimizeDeps: {
+    include: ['three'],
+  },
+  build: {
+    rollupOptions: {
+      // Explicitly externalize 'three' so Rollup does NOT try to bundle it.
+      // It will be loaded globally via the CDN script.
+      external: ['three'],
+      output: {
+        // Map 'three' import to the global THREE object provided by the CDN.
+        globals: {
+          three: 'THREE',
+        },
+      },
+    },
+  },
 }));

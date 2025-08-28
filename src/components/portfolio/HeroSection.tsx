@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 const HeroSection = () => {
   const socialLinks = [{
     icon: Github,
@@ -39,6 +40,15 @@ const HeroSection = () => {
 
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <div className="mb-8">
+          {/* Profile Avatar */}
+          <div className="flex justify-center mb-6">
+            <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-primary/20 shadow-glow">
+              <AvatarImage src="" alt="Palepu Stephen" />
+              <AvatarFallback className="text-2xl md:text-3xl font-bold bg-gradient-to-br from-primary to-secondary text-primary-foreground">
+                PS
+              </AvatarFallback>
+            </Avatar>
+          </div>
           <h1 className="text-5xl md:text-7xl font-bold text-text-primary mb-4">Palepu Stephen</h1>
           <div className="text-xl md:text-2xl text-text-secondary mb-6 font-medium">
             <span className="text-primary">AI/ML Enthusiast</span> | 

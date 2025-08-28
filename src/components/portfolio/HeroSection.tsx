@@ -1,6 +1,7 @@
 import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import ParticleBackground from '@/components/animations/ParticleBackground'; // Import the new component
 
 const HeroSection = () => {
   const socialLinks = [{
@@ -30,17 +31,17 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-500 via-purple-500 to-pink-500 opacity-20 animate-glow"></div>
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
+      {/* Animated gradient background - now handled by ParticleBackground */}
+      <ParticleBackground />
       
-      {/* Floating particles effect */}
-      <div className="absolute inset-0">
+      {/* Floating particles effect (optional, can be removed if ParticleBackground is sufficient) */}
+      {/* <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
         <div className="absolute top-40 right-32 w-1 h-1 bg-secondary rounded-full animate-ping"></div>
         <div className="absolute bottom-32 left-40 w-3 h-3 bg-accent rounded-full animate-pulse"></div>
         <div className="absolute bottom-20 right-20 w-1 h-1 bg-primary rounded-full animate-ping"></div>
-      </div>
+      </div> */}
 
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <div className="mb-8">

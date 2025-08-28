@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback } from 'react';
-import * as THREE from 'three';
+//import * as THREE from 'three';
 
 const ParticleBackground = () => {
     const mountRef = useRef<HTMLDivElement>(null);

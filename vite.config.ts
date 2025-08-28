@@ -19,20 +19,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Keep optimizeDeps for local development, but it won't affect the build with externalization
-  optimizeDeps: {
-    include: ['three'],
-  },
-  build: {
-    rollupOptions: {
-      // Explicitly externalize 'three' so Rollup doesn't try to bundle it
-      external: ['three'],
-      output: {
-        // Ensure that external modules are handled correctly if they appear in chunks
-        globals: {
-          three: 'THREE', // Map 'three' import to the global THREE object
-        },
-      },
-    },
-  },
 }));

@@ -1,6 +1,7 @@
 import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 const HeroSection = () => {
   const socialLinks = [{
     icon: Github,
@@ -18,6 +19,7 @@ const HeroSection = () => {
     href: 'mailto:stifen0000@gmail.com',
     color: 'hover:text-accent'
   }];
+
   const scrollToAbout = () => {
     const element = document.getElementById('about');
     if (element) {
@@ -26,9 +28,11 @@ const HeroSection = () => {
       });
     }
   };
-  return <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+
+  return (
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 gradient-hero opacity-10"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-500 via-purple-500 to-pink-500 opacity-20 animate-glow"></div>
       
       {/* Floating particles effect */}
       <div className="absolute inset-0">
@@ -65,9 +69,18 @@ const HeroSection = () => {
 
         {/* Social Links */}
         <div className="flex justify-center space-x-6 mb-12">
-          {socialLinks.map((link, index) => <a key={index} href={link.href} target="_blank" rel="noopener noreferrer" className={`p-3 rounded-full bg-card shadow-card transition-spring ${link.color} border border-card-border hover:shadow-hover hover:scale-110`} aria-label={link.label}>
+          {socialLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-3 rounded-full bg-card shadow-card transition-spring ${link.color} border border-card-border hover:shadow-hover hover:scale-110`}
+              aria-label={link.label}
+            >
               <link.icon size={24} />
-            </a>)}
+            </a>
+          ))}
         </div>
 
         {/* CTA Button */}
@@ -83,6 +96,8 @@ const HeroSection = () => {
           <ArrowDown className="w-6 h-6 text-text-light" />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default HeroSection;

@@ -1,16 +1,19 @@
 import React, { useRef, useEffect, useCallback } from 'react';
-import * as THREE from 'three';
+// import * as THREE from 'three'; // REMOVED: We will use global THREE from CDN
 
 const ParticleBackground = () => {
     const mountRef = useRef<HTMLDivElement>(null);
-    const scene = useRef<THREE.Scene | null>(null);
-    const camera = useRef<THREE.PerspectiveCamera | null>(null);
-    const renderer = useRef<THREE.WebGLRenderer | null>(null);
-    const cube = useRef<THREE.Mesh | null>(null);
+    const scene = useRef<any>(null); // Use 'any' or define THREE types if available globally
+    const camera = useRef<any>(null);
+    const renderer = useRef<any>(null);
+    const cube = useRef<any>(null);
 
     // Function to initialize the Three.js scene
     const initThree = useCallback(() => {
-        if (!mountRef.current) return;
+        // Ensure THREE is available globally
+        if (!window.THREE || !mountRef.current) return;
+
+        const THREE = window.THREE; // Reference the global THREE
 
         // Scene
         scene.current = new THREE.Scene();
@@ -58,10 +61,17 @@ const ParticleBackground = () => {
     }, []);
 
     useEffect(() => {
-        initThree();
-        animate();
+        // Only initialize if THREE is available
+        if (window.THREE) {
+            initThree();
+            animate();
+            window.addEventListener('resize', onWindowResize);
+        } else {
+            // Fallback or error handling if THREE is not loaded
+            console.error("THREE.js not loaded. ParticleBackground will not render.");
+            // You might want to render a placeholder or a different background here
+        }
 
-        window.addEventListener('resize', onWindowResize);
 
         return () => {
             window.removeEventListener('resize', onWindowResize);

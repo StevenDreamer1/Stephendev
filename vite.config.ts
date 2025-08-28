@@ -19,4 +19,13 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Add this optimization block for three.js
+  optimizeDeps: {
+    include: ['three'],
+  },
+  build: {
+    rollupOptions: {
+      external: [], // Ensure 'three' is not externalized if it's a direct dependency
+    },
+  },
 }));

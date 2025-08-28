@@ -32,12 +32,6 @@ const ExperienceSection = () => {
       icon: Gamepad2,
       color: 'text-primary',
       bgColor: 'bg-primary/10'
-    },
-    {
-      name: 'Cooking',
-      icon: Utensils,
-      color: 'text-secondary',
-      bgColor: 'bg-secondary/10'
     }
   ];
 
@@ -114,8 +108,7 @@ const ExperienceSection = () => {
               <p className="text-text-secondary leading-relaxed">
                 Beyond coding and design, I find inspiration in capturing moments through 
                 <span className="text-secondary font-medium"> photography and videography</span>, 
-                staying active through <span className="text-primary font-medium">sports</span>, 
-                and exploring creativity in the <span className="text-accent font-medium">kitchen</span>. 
+                staying active through <span className="text-primary font-medium">sports</span>. 
                 These diverse interests help me bring a well-rounded perspective to my technical work.
               </p>
             </div>

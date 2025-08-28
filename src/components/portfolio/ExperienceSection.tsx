@@ -1,5 +1,6 @@
 import { Briefcase, Camera, Utensils, Gamepad2, Award } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import React, { useEffect, useRef, useState } from 'react'; // Import React hooks
 
 const ExperienceSection = () => {
   const experience = [
@@ -35,10 +36,36 @@ const ExperienceSection = () => {
     }
   ];
 
+  // State and ref for intersection observer
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Disconnect after it's visible once
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="experience" className="py-20 bg-gradient-subtle">
+    <section id="experience" ref={sectionRef} className="py-20 bg-gradient-subtle">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
             Experience & Interests
           </h2>
@@ -49,7 +76,7 @@ const ExperienceSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Professional Experience */}
-          <div>
+          <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h3 className="text-2xl font-bold text-text-primary mb-8 flex items-center">
               <Award className="w-6 h-6 text-primary mr-3" />
               Professional Experience
@@ -57,7 +84,11 @@ const ExperienceSection = () => {
             
             <div className="space-y-6">
               {experience.map((exp, index) => (
-                <Card key={index} className="p-6 shadow-card hover:shadow-hover transition-spring border-card-border group">
+                <Card 
+                  key={index} 
+                  className={`p-6 shadow-card hover:shadow-hover transition-spring border-card-border group transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                  style={{ transitionDelay: `${index * 100 + 300}ms` }} // Staggered animation
+                >
                   <div className="flex items-start">
                     <div className={`p-3 ${exp.bgColor} rounded-lg mr-4 group-hover:scale-110 transition-spring`}>
                       <exp.icon className={`w-6 h-6 ${exp.color}`} />
@@ -83,7 +114,7 @@ const ExperienceSection = () => {
           </div>
 
           {/* Hobbies & Interests */}
-          <div>
+          <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h3 className="text-2xl font-bold text-text-primary mb-8">
               Hobbies & Interests
             </h3>
@@ -92,7 +123,8 @@ const ExperienceSection = () => {
               {hobbies.map((hobby, index) => (
                 <Card 
                   key={index} 
-                  className="p-6 text-center shadow-card hover:shadow-hover transition-spring border-card-border group cursor-pointer"
+                  className={`p-6 text-center shadow-card hover:shadow-hover transition-spring border-card-border group cursor-pointer transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                  style={{ transitionDelay: `${index * 100 + 400}ms` }} // Staggered animation
                 >
                   <div className={`inline-flex p-4 ${hobby.bgColor} rounded-xl mb-4 group-hover:scale-110 transition-spring`}>
                     <hobby.icon className={`w-8 h-8 ${hobby.color}`} />
@@ -104,7 +136,7 @@ const ExperienceSection = () => {
               ))}
             </div>
 
-            <div className="mt-8 p-6 bg-card rounded-xl border border-card-border shadow-card">
+            <div className={`mt-8 p-6 bg-card rounded-xl border border-card-border shadow-card transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <p className="text-text-secondary leading-relaxed">
                 Beyond coding and design, I find inspiration in capturing moments through 
                 <span className="text-secondary font-medium"> photography and videography</span>, 

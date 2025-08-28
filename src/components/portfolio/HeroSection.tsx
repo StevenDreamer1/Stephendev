@@ -43,7 +43,7 @@ const HeroSection = () => {
           {/* Profile Avatar */}
           <div className="flex justify-center mb-6">
             <Avatar className="w-40 h-40 md:w-48 md:h-48 border-4 border-primary/20 shadow-glow">
-              <AvatarImage src="/lovable-uploads/dd72133c-f99e-4425-a308-45de457cca34.png" alt="Palepu Stephen" />
+              <AvatarImage src="/lovable-uploads/f6ee06a3-2d2a-4d8d-872a-1e9343b82418.png" alt="Palepu Stephen" />
               <AvatarFallback className="text-2xl md:text-3xl font-bold bg-gradient-to-br from-primary to-secondary text-primary-foreground mx-0 my-0 py-0">
                 PS
               </AvatarFallback>

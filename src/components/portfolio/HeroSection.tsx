@@ -1,6 +1,6 @@
 import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Import Avatar components
 import ParticleBackground from '@/components/animations/ParticleBackground'; // Import the new component
 
 const HeroSection = () => {
@@ -32,20 +32,31 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
-      {/* Animated gradient background - now handled by ParticleBackground */}
+      {/* Animated background - now handled by ParticleBackground */}
       <ParticleBackground />
       
+      {/* Floating particles effect (optional, can be removed if ParticleBackground is sufficient) */}
+      {/* The original floating particles are commented out as ParticleBackground provides a more advanced effect.
+          Uncomment if you wish to layer them, but it might be visually busy. */}
+      {/* <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+        <div className="absolute top-40 right-32 w-1 h-1 bg-secondary rounded-full animate-ping"></div>
+        <div className="absolute bottom-32 left-40 w-3 h-3 bg-accent rounded-full animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-1 h-1 bg-primary rounded-full animate-ping"></div>
+      </div> */}
+
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <div className="mb-8">
           {/* Header and Profile Avatar */}
-          <div className="flex flex-col md:flex-row items-center justify-center md:justify-start md:space-x-8 mb-6"> {/* Changed for left alignment and spacing */}
-            <Avatar className="w-48 h-48 md:w-64 md:h-64 border-4 border-primary/20 shadow-glow mb-4 md:mb-0"> {/* Increased size and added responsive margin */}
+          {/* Layout adjusted for avatar on left and larger size */}
+          <div className="flex flex-col md:flex-row items-center justify-center md:justify-start md:space-x-8 mb-6">
+            <Avatar className="w-48 h-48 md:w-64 md:h-64 border-4 border-primary/20 shadow-glow mb-4 md:mb-0">
               <AvatarImage src="/lovable-uploads/f6ee06a3-2d2a-4d8d-872a-1e9343b82418.png" alt="Palepu Stephen" />
               <AvatarFallback className="text-3xl md:text-4xl font-bold bg-gradient-to-br from-primary to-secondary text-primary-foreground mx-0 my-0 py-0">
                 PS
               </AvatarFallback>
             </Avatar>
-            <h1 className="text-5xl md:text-7xl font-bold text-text-primary text-center md:text-left">Palepu Stephen</h1> {/* Adjusted text alignment */}
+            <h1 className="text-5xl md:text-7xl font-bold text-text-primary text-center md:text-left">Palepu Stephen</h1>
           </div>
           
           <div className="text-xl md:text-2xl text-text-secondary mb-6 font-medium">

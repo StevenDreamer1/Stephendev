@@ -30,6 +30,10 @@ const HeroSection = () => {
     }
   };
 
+  const navigateToSamsAi = () => {
+    window.location.href = '/sams-ai';
+  };
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background font-mono"> {/* Apply monospace font */}
       <ParticleBackground /> {/* Keep ParticleBackground */}
@@ -77,11 +81,15 @@ const HeroSection = () => {
                 <link.icon size={20} />
               </a>
             ))}
-            {/* New SAMS.ai text beside email icon */}
-            <div className="flex items-center space-x-2 text-accent text-2xl md:text-3xl font-bold">
+            {/* SAMS.ai as a clickable button */}
+            <Button 
+              variant="ghost" 
+              onClick={navigateToSamsAi} 
+              className="flex items-center space-x-2 text-accent text-2xl md:text-3xl font-bold hover:text-primary transition-colors duration-300"
+            >
               <Bot className="w-6 h-6" />
               <span>SAMS.ai</span>
-            </div>
+            </Button>
           </div>
 
           {/* CTA Buttons */}

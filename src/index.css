@@ -7,7 +7,7 @@
 @layer base {
   :root {
     /* Core backgrounds */
-    --background: 239 9% 31%; /* Changed to #495057 (dark grayish-blue) */
+    --background: 0 0% 10%; /* Changed to #191919 (very dark grey) */
     --foreground: 0 0% 100%; /* Kept white for better contrast */
 
     /* Card system */

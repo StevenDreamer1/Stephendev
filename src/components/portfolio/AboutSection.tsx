@@ -128,27 +128,26 @@ const AboutSection = () => {
           </Card>
         </div>
 
-        {/* Skills Grid */}
+        {/* Technical Skills Section */}
         <div className="mb-16">
           <h3 className={`text-3xl font-bold text-text-primary text-center mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <span className="text-primary">Technical</span> <span className="text-secondary">Skills</span>
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Updated grid layout for skills to match the 4-square image */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
               <Card 
                 key={index} 
-                className={`p-6 shadow-card hover:shadow-hover transition-spring border-card-border group transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                className={`p-6 shadow-card hover:shadow-hover transition-spring border-card-border group flex flex-col items-center justify-center text-center transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
                 style={{ transitionDelay: `${index * 100 + 400}ms` }} // Staggered animation
               >
-                <div className="flex items-center mb-4">
-                  <div className={`p-3 ${skill.bgColor} rounded-lg mr-3 group-hover:scale-110 transition-spring`}>
-                    <skill.icon className={`w-6 h-6 ${skill.color}`} />
-                  </div>
-                  <h4 className="text-lg font-semibold text-text-primary">{skill.category}</h4>
+                <div className={`p-3 ${skill.bgColor} rounded-lg mb-4 group-hover:scale-110 transition-spring`}>
+                  <skill.icon className={`w-8 h-8 ${skill.color}`} />
                 </div>
-                <div className="space-y-2">
+                <h4 className="text-xl font-semibold text-text-primary mb-2">{skill.category}</h4>
+                <div className="space-y-1">
                   {skill.items.map((item, itemIndex) => (
-                    <div key={itemIndex} className="text-text-secondary font-medium">
+                    <div key={itemIndex} className="text-text-secondary text-sm font-medium">
                       <span className="text-accent">const</span> {item} <span className="text-blue-400">= true;</span>
                     </div>
                   ))}

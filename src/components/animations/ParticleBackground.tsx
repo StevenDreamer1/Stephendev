@@ -16,9 +16,11 @@ const ParticleBackground = () => {
     const particles = useRef<any>(null);
     const lines = useRef<any>(null);
     const particlePositions = useRef<Float32Array | null>(null);
-    const numParticles = 200;
-    const particleSize = 0.5;
-    const maxDistance = 70; // Max distance for lines to connect
+    const particleColors = useRef<Float32Array | null>(null); // Store particle colors
+    const numParticles = 300; // Increased particle count for a denser network
+    const particleSize = 0.8; // Slightly increased particle size
+    const maxDistance = 90; // Increased max distance for more connections
+    const animationSpeed = 0.00005; // Slower, smoother animation speed
 
     // Function to initialize the Three.js scene
     const initThree = useCallback(() => {
@@ -37,7 +39,7 @@ const ParticleBackground = () => {
             0.1,
             1000
         );
-        camera.current.position.z = 150;
+        camera.current.position.z = 200; // Adjusted camera position
 
         // Renderer
         renderer.current = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -47,16 +49,19 @@ const ParticleBackground = () => {
         // Particles
         const positions = new Float32Array(numParticles * 3);
         const colors = new Float32Array(numParticles * 3);
+        
         const pMaterial = new THREE.PointsMaterial({
             size: particleSize,
             vertexColors: true,
             blending: THREE.AdditiveBlending,
             transparent: true,
             sizeAttenuation: true,
+            opacity: 0.7 // Make particles slightly more opaque
         });
 
         const pGeometry = new THREE.BufferGeometry();
         particlePositions.current = positions; // Store positions for animation
+        particleColors.current = colors; // Store colors for potential dynamic changes
 
         for (let i = 0; i < numParticles; i++) {
             const i3 = i * 3;
@@ -64,10 +69,10 @@ const ParticleBackground = () => {
             positions[i3 + 1] = (Math.random() * 400) - 200; // y
             positions[i3 + 2] = (Math.random() * 400) - 200; // z
 
-            // Random color for each particle
-            colors[i3] = Math.random();
-            colors[i3 + 1] = Math.random();
-            colors[i3 + 2] = Math.random();
+            // Subtle color variation (e.g., shades of blue/purple/white)
+            colors[i3] = Math.random() * 0.2 + 0.6; // Red component (more blue/purple)
+            colors[i3 + 1] = Math.random() * 0.2 + 0.7; // Green component
+            colors[i3 + 2] = Math.random() * 0.5 + 0.5; // Blue component (more white/light blue)
         }
 
         pGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -87,7 +92,8 @@ const ParticleBackground = () => {
             vertexColors: true,
             blending: THREE.AdditiveBlending,
             transparent: true,
-            opacity: 0.5,
+            opacity: 0.8, // Make lines more opaque
+            linewidth: 1 // Attempt to make lines thicker (may require WebGLRenderer.setLineWidth for older versions)
         });
         lines.current = new THREE.LineSegments(lineGeometry, lineMaterial);
         scene.current.add(lines.current);
@@ -108,14 +114,14 @@ const ParticleBackground = () => {
             // Update particle positions
             for (let i = 0; i < numParticles; i++) {
                 const i3 = i * 3;
-                // Simple movement
-                positions[i3] += 0.1 * Math.sin(i * 0.1 + Date.now() * 0.0001);
-                positions[i3 + 1] += 0.1 * Math.cos(i * 0.1 + Date.now() * 0.0001);
-                positions[i3 + 2] += 0.1 * Math.sin(i * 0.1 + Date.now() * 0.0001);
+                // Smoother, less erratic movement
+                positions[i3] += 0.5 * Math.sin(i * 0.05 + Date.now() * animationSpeed);
+                positions[i3 + 1] += 0.5 * Math.cos(i * 0.05 + Date.now() * animationSpeed);
+                positions[i3 + 2] += 0.5 * Math.sin(i * 0.05 + Date.now() * animationSpeed);
 
                 // Keep particles within bounds
                 if (positions[i3] > 200) positions[i3] = -200;
-                if (positions[i3] < -200) positions[i3] = 200; // Corrected line
+                if (positions[i3] < -200) positions[i3] = 200;
                 if (positions[i3 + 1] > 200) positions[i3 + 1] = -200;
                 if (positions[i3 + 1] < -200) positions[i3 + 1] = 200;
                 if (positions[i3 + 2] > 200) positions[i3 + 2] = -200;
@@ -147,13 +153,13 @@ const ParticleBackground = () => {
                         linePositions[lineIndex++] = positions[j3 + 1];
                         linePositions[lineIndex++] = positions[j3 + 2];
 
-                        // Line color (white with varying alpha)
-                        lineColors[lineIndex - 6] = 1;
-                        lineColors[lineIndex - 5] = 1;
-                        lineColors[lineIndex - 4] = 1;
-                        lineColors[lineIndex - 3] = 1;
-                        lineColors[lineIndex - 2] = 1;
-                        lineColors[lineIndex - 1] = 1;
+                        // Line color (white with varying alpha, slightly tinted)
+                        lineColors[lineIndex - 6] = alpha * 0.8 + 0.2; // R
+                        lineColors[lineIndex - 5] = alpha * 0.9 + 0.1; // G
+                        lineColors[lineIndex - 4] = alpha * 1.0;       // B
+                        lineColors[lineIndex - 3] = alpha * 0.8 + 0.2; // R
+                        lineColors[lineIndex - 2] = alpha * 0.9 + 0.1; // G
+                        lineColors[lineIndex - 1] = alpha * 1.0;       // B
 
                         (lines.current.material as THREE.LineBasicMaterial).opacity = alpha;
                     }
@@ -170,8 +176,8 @@ const ParticleBackground = () => {
             lines.current.geometry.setDrawRange(0, lineIndex / 3);
 
             // Rotate camera slightly for a dynamic feel
-            camera.current.rotation.y += 0.0005;
-            camera.current.rotation.x += 0.0002;
+            camera.current.rotation.y += 0.0003; // Slower rotation
+            camera.current.rotation.x += 0.0001; // Slower rotation
 
             renderer.current.render(scene.current, camera.current);
         }
@@ -208,6 +214,7 @@ const ParticleBackground = () => {
             particles.current = null;
             lines.current = null;
             particlePositions.current = null;
+            particleColors.current = null;
         };
     }, [initThree, animate, onWindowResize]);
 

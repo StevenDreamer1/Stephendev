@@ -37,9 +37,9 @@ const HeroSection = () => {
       <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-12 relative z-10"> {/* Two-column layout, ensure z-index for content */}
         {/* Left Column: Profile Avatar */}
         <div className="flex justify-center md:justify-end order-2 md:order-1"> {/* Order changed for mobile-first stacking */}
-          <Avatar className="w-[500px] h-[500px] border-4 border-primary/20 shadow-glow"> {/* Increased size to 500px */}
+          <Avatar className="w-[400px] h-[400px] border-4 border-primary/20 shadow-glow"> {/* Resized to 400x400px */}
             <AvatarImage src="/lovable-uploads/f6ee06a3-2d2a-4d8d-872a-1e9343b82418.png" alt="Palepu Stephen" /> {/* Reverted image source */}
-            <AvatarFallback className="text-6xl font-bold bg-card text-card-foreground"> {/* Adjusted fallback text size */}
+            <AvatarFallback className="text-5xl font-bold bg-card text-card-foreground"> {/* Adjusted fallback text size */}
               PS
             </AvatarFallback>
           </Avatar>
@@ -48,7 +48,7 @@ const HeroSection = () => {
         {/* Right Column: Text Content */}
         <div className="text-center md:text-left order-1 md:order-2"> {/* Order changed for mobile-first stacking */}
           <div className="mb-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-2">Palepu Stephen</h1> {/* Use theme text primary */}
+            <h1 className="text-4xl md:text-6xl font-balgin font-bold text-text-primary mb-2">Palepu Stephen</h1> {/* Applied Balgin font */}
             <div className="text-lg md:text-xl text-text-secondary mb-4 font-medium"> {/* Use theme text secondary */}
               <span className="text-primary">AI/ML Enthusiast</span> | 
               <span className="text-secondary"> UI/UX Designer</span> | 

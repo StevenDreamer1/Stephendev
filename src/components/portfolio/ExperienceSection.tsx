@@ -1,6 +1,7 @@
 import { Briefcase, Camera, Gamepad2, Award } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import React, { useEffect, useRef, useState } from 'react'; // Import React hooks
+import { Button } from '@/components/ui/button';
 
 const ExperienceSection = () => {
   const experience = [

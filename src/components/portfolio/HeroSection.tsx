@@ -37,9 +37,9 @@ const HeroSection = () => {
       <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-12 relative z-10"> {/* Two-column layout, ensure z-index for content */}
         {/* Left Column: Profile Avatar */}
         <div className="flex justify-center md:justify-end order-2 md:order-1"> {/* Order changed for mobile-first stacking */}
-          <Avatar className="w-80 h-80 md:w-96 md:h-96 border-4 border-primary/20 shadow-glow"> {/* Increased size */}
+          <Avatar className="w-[500px] h-[500px] border-4 border-primary/20 shadow-glow"> {/* Increased size to 500px */}
             <AvatarImage src="/lovable-uploads/f6ee06a3-2d2a-4d8d-872a-1e9343b82418.png" alt="Palepu Stephen" />
-            <AvatarFallback className="text-5xl md:text-6xl font-bold bg-card text-card-foreground"> {/* Increased fallback text size */}
+            <AvatarFallback className="text-6xl font-bold bg-card text-card-foreground"> {/* Adjusted fallback text size */}
               PS
             </AvatarFallback>
           </Avatar>

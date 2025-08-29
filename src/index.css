@@ -11,9 +11,9 @@
     --foreground: 0 0% 100%; /* Kept white for better contrast */
 
     /* Card system */
-    --card: 0 0% 100%;
-    --card-foreground: 225 15% 15%;
-    --card-border: 220 13% 91%;
+    --card: 0 0% 18%; /* Darker card background for contrast */
+    --card-foreground: 0 0% 100%; /* White text on cards */
+    --card-border: 220 13% 30%; /* Lighter border for contrast */
 
     /* AI/ML Brand colors */
     --primary: 246 58% 54%; /* Deep blue */
@@ -27,23 +27,23 @@
     --accent-foreground: 0 0% 100%;
 
     /* Neutral tones */
-    --muted: 220 13% 95%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 220 13% 25%; /* Darker muted background */
+    --muted-foreground: 220 9% 70%; /* Lighter muted text */
     
     /* Text hierarchy */
-    --text-primary: 0 0% 100%; /* Kept white for better visibility */
-    --text-secondary: 220 14% 71%; /* Kept lighter grey for better visibility */
+    --text-primary: 0 0% 100%; /* White for primary text */
+    --text-secondary: 220 14% 71%; /* Lighter grey for secondary text */
     --text-light: 220 14% 71%;
 
     /* Interactive states */
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 220 13% 30%; /* Lighter border for contrast */
+    --input: 220 13% 30%; /* Lighter input border */
     --ring: 246 58% 54%;
 
     /* AI-themed gradients */
     --gradient-hero: linear-gradient(135deg, hsl(246 58% 54%), hsl(280 60% 65%), hsl(158 64% 52%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 13% 98%));
-    --gradient-subtle: linear-gradient(180deg, hsl(246 58% 97%), hsl(0 0% 100%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 18%), hsl(0 0% 25%)); /* Darker card gradient */
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 15%), hsl(0 0% 10%)); /* Darker subtle gradient */
 
     /* Shadows */
     --shadow-card: 0 4px 20px -2px hsl(246 58% 54% / 0.08);
@@ -56,18 +56,19 @@
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-background: 0 0% 15%; /* Adjusted for dark theme */
+    --sidebar-foreground: 0 0% 90%; /* Adjusted for dark theme */
     --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
+    --sidebar-accent: 240 3.7% 20%; /* Adjusted for dark theme */
+    --sidebar-accent-foreground: 0 0% 90%; /* Adjusted for dark theme */
+    --sidebar-border: 220 13% 30%; /* Adjusted for dark theme */
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%; /* Keeping dark mode background for now */
+    /* Keep dark theme variables consistent if a dark mode toggle is implemented */
+    --background: 222.2 84% 4.9%; 
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;

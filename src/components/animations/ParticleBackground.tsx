@@ -79,13 +79,49 @@ const ParticleBackground = () => {
         particles.current = new THREE.Points(pGeometry, pMaterial);
         scene.current.add(particles.current);
 
-        // Moving Tech Icons
+        // Moving Tech Icons using Devicon SVG links
         const iconImageUrls = [
-            'https://placehold.co/100x100/A020F0/ffffff?text=REACT', // Placeholder for React
-            'https://placehold.co/100x100/000000/ffffff?text=NODEJS', // Placeholder for Node.js
-            'https://placehold.co/100x100/306998/ffffff?text=PYTHON', // Placeholder for Python
-            'https://placehold.co/100x100/F24E1E/ffffff?text=FIGMA', // Placeholder for Figma
-            'https://placehold.co/100x100/007ACC/ffffff?text=TYPESCRIPT' // Placeholder for TypeScript
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ruby/ruby-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/svelte/svelte-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gatsby/gatsby-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rails/rails-original-wordmark.svg", // Ruby on Rails
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original.svg", // AWS
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webpack/webpack-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/babel/babel-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yarn/yarn-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg"
         ];
         const iconSize = 60; // Size of the tech icons
         const textureLoader = new THREE.TextureLoader();
@@ -93,7 +129,7 @@ const ParticleBackground = () => {
         iconImageUrls.forEach((url, i) => {
             textureLoader.load(url,
                 (texture) => {
-                    const geometry = new THREE.PlaneGeometry(iconSize, iconSize); // Use PlaneGeometry for icons
+                    const geometry = new THREE.PlaneGeometry(iconSize, iconSize);
                     const material = new THREE.MeshBasicMaterial({
                         map: texture,
                         transparent: true,
@@ -200,7 +236,7 @@ const ParticleBackground = () => {
             camera.current = null;
             renderer.current = null;
             particles.current = null;
-            techIcons.current = []; // Clear tech icons on cleanup
+            techIcons.current = [];
             particlePositions.current = null;
             particleColors.current = null;
         };

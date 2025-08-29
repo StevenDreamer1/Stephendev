@@ -14,12 +14,12 @@ const ParticleBackground = () => {
     const camera = useRef<any>(null);
     const renderer = useRef<any>(null);
     const particles = useRef<any>(null);
-    const lines = useRef<any>(null);
+    // const lines = useRef<any>(null); // Removed lines ref
     const particlePositions = useRef<Float32Array | null>(null);
     const particleColors = useRef<Float32Array | null>(null); // Store particle colors
     const numParticles = 300; // Increased particle count for a denser network
     const particleSize = 0.8; // Slightly increased particle size
-    const maxDistance = 90; // Increased max distance for more connections
+    // const maxDistance = 90; // Removed maxDistance as lines are gone
     const animationSpeed = 0.00005; // Slower, smoother animation speed
 
     // Function to initialize the Three.js scene
@@ -81,22 +81,22 @@ const ParticleBackground = () => {
         particles.current = new THREE.Points(pGeometry, pMaterial);
         scene.current.add(particles.current);
 
-        // Lines
-        const lineGeometry = new THREE.BufferGeometry();
-        const linePositions = new Float32Array(numParticles * numParticles * 3 * 2); // Max possible lines
-        const lineColors = new Float32Array(numParticles * numParticles * 3 * 2);
-        lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-        lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+        // Removed Lines initialization
+        // const lineGeometry = new THREE.BufferGeometry();
+        // const linePositions = new Float32Array(numParticles * numParticles * 3 * 2);
+        // const lineColors = new Float32Array(numParticles * numParticles * 3 * 2);
+        // lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+        // lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
 
-        const lineMaterial = new THREE.LineBasicMaterial({
-            vertexColors: true,
-            blending: THREE.AdditiveBlending,
-            transparent: true,
-            opacity: 0.8, // Make lines more opaque
-            linewidth: 1 // Attempt to make lines thicker (may require WebGLRenderer.setLineWidth for older versions)
-        });
-        lines.current = new THREE.LineSegments(lineGeometry, lineMaterial);
-        scene.current.add(lines.current);
+        // const lineMaterial = new THREE.LineBasicMaterial({
+        //     vertexColors: true,
+        //     blending: THREE.AdditiveBlending,
+        //     transparent: true,
+        //     opacity: 0.8,
+        //     linewidth: 1
+        // });
+        // lines.current = new THREE.LineSegments(lineGeometry, lineMaterial);
+        // scene.current.add(lines.current);
 
     }, []);
 
@@ -104,12 +104,12 @@ const ParticleBackground = () => {
     const animate = useCallback(() => {
         requestAnimationFrame(animate);
 
-        if (particles.current && particlePositions.current && lines.current && renderer.current && camera.current && scene.current && window.THREE) {
+        // Removed lines.current from the condition
+        if (particles.current && particlePositions.current && renderer.current && camera.current && scene.current && window.THREE) {
             const THREE = window.THREE; // Reference the global THREE
             const positions = particlePositions.current;
-            const linePositions = (lines.current.geometry.attributes.position as THREE.BufferAttribute).array as Float32Array;
-            const lineColors = (lines.current.geometry.attributes.color as THREE.BufferAttribute).array as Float32Array;
-            let lineIndex = 0;
+            // Removed linePositions and lineColors as lines are gone
+            // let lineIndex = 0; // Removed lineIndex
 
             // Update particle positions
             for (let i = 0; i < numParticles; i++) {
@@ -129,51 +129,42 @@ const ParticleBackground = () => {
             }
             particles.current.geometry.attributes.position.needsUpdate = true;
 
-            // Update lines
-            for (let i = 0; i < numParticles; i++) {
-                for (let j = i + 1; j < numParticles; j++) {
-                    const i3 = i * 3;
-                    const j3 = j * 3;
+            // Removed Lines update logic
+            // for (let i = 0; i < numParticles; i++) {
+            //     for (let j = i + 1; j < numParticles; j++) {
+            //         const i3 = i * 3;
+            //         const j3 = j * 3;
+            //         const dx = positions[i3] - positions[j3];
+            //         const dy = positions[i3 + 1] - positions[j3 + 1];
+            //         const dz = positions[i3 + 2] - positions[j3 + 2];
+            //         const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+            //         if (distance < maxDistance) {
+            //             const alpha = 1 - (distance / maxDistance);
+            //             linePositions[lineIndex++] = positions[i3];
+            //             linePositions[lineIndex++] = positions[i3 + 1];
+            //             linePositions[lineIndex++] = positions[i3 + 2];
+            //             linePositions[lineIndex++] = positions[j3];
+            //             linePositions[lineIndex++] = positions[j3 + 1];
+            //             linePositions[lineIndex++] = positions[j3 + 2];
+            //             lineColors[lineIndex - 6] = alpha * 0.8 + 0.2;
+            //             lineColors[lineIndex - 5] = alpha * 0.9 + 0.1;
+            //             lineColors[lineIndex - 4] = alpha * 1.0;
+            //             lineColors[lineIndex - 3] = alpha * 0.8 + 0.2;
+            //             lineColors[lineIndex - 2] = alpha * 0.9 + 0.1;
+            //             lineColors[lineIndex - 1] = alpha * 1.0;
+            //             (lines.current.material as THREE.LineBasicMaterial).opacity = alpha;
+            //         }
+            //     }
+            // }
 
-                    const dx = positions[i3] - positions[j3];
-                    const dy = positions[i3 + 1] - positions[j3 + 1];
-                    const dz = positions[i3 + 2] - positions[j3 + 2];
-                    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                    if (distance < maxDistance) {
-                        const alpha = 1 - (distance / maxDistance); // Fade lines based on distance
-
-                        // Start point of the line
-                        linePositions[lineIndex++] = positions[i3];
-                        linePositions[lineIndex++] = positions[i3 + 1];
-                        linePositions[lineIndex++] = positions[i3 + 2];
-
-                        // End point of the line
-                        linePositions[lineIndex++] = positions[j3];
-                        linePositions[lineIndex++] = positions[j3 + 1];
-                        linePositions[lineIndex++] = positions[j3 + 2];
-
-                        // Line color (white with varying alpha, slightly tinted)
-                        lineColors[lineIndex - 6] = alpha * 0.8 + 0.2; // R
-                        lineColors[lineIndex - 5] = alpha * 0.9 + 0.1; // G
-                        lineColors[lineIndex - 4] = alpha * 1.0;       // B
-                        lineColors[lineIndex - 3] = alpha * 0.8 + 0.2; // R
-                        lineColors[lineIndex - 2] = alpha * 0.9 + 0.1; // G
-                        lineColors[lineIndex - 1] = alpha * 1.0;       // B
-
-                        (lines.current.material as THREE.LineBasicMaterial).opacity = alpha;
-                    }
-                }
-            }
-
-            // Clear unused line segments
-            for (let i = lineIndex; i < linePositions.length; i++) {
-                linePositions[i] = 0;
-                lineColors[i] = 0;
-            }
-            (lines.current.geometry.attributes.position as THREE.BufferAttribute).needsUpdate = true;
-            (lines.current.geometry.attributes.color as THREE.BufferAttribute).needsUpdate = true;
-            lines.current.geometry.setDrawRange(0, lineIndex / 3);
+            // Removed Lines cleanup and draw range update
+            // for (let i = lineIndex; i < linePositions.length; i++) {
+            //     linePositions[i] = 0;
+            //     lineColors[i] = 0;
+            // }
+            // (lines.current.geometry.attributes.position as THREE.BufferAttribute).needsUpdate = true;
+            // (lines.current.geometry.attributes.color as THREE.BufferAttribute).needsUpdate = true;
+            // lines.current.geometry.setDrawRange(0, lineIndex / 3);
 
             // Rotate camera slightly for a dynamic feel
             camera.current.rotation.y += 0.0003; // Slower rotation
@@ -212,7 +203,7 @@ const ParticleBackground = () => {
             camera.current = null;
             renderer.current = null;
             particles.current = null;
-            lines.current = null;
+            // lines.current = null; // Removed lines cleanup
             particlePositions.current = null;
             particleColors.current = null;
         };

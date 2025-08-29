@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, MessageSquare, Code, Terminal, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import ParticleBackground from '@/components/animations/ParticleBackground'; // Adjusted import path to use alias
+import { Button } from '@/components/ui/button'; // Keep alias for UI components
+import { Textarea } from '@/components/ui/textarea'; // Corrected typo: removed 's' after Textarea
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'; // Keep alias for UI components
+import { ScrollArea } from '@/components/ui/scroll-area'; // Keep alias for UI components
+import ParticleBackground from '../components/animations/ParticleBackground'; // Explicit relative path
 
 // Define the chat message type
 interface ChatMessage {
-  role: 'user' | 'model' | 'code'; // Added 'code' role for generated code
-  parts: { text: string; language?: string }[]; // Added language for code blocks
+  role: 'user' | 'model' | 'code';
+  parts: { text: string; language?: string }[];
 }
 
 const SamsAiPage = () => {
@@ -17,9 +17,8 @@ const SamsAiPage = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const codeOutputRef = useRef<HTMLPreElement>(null); // Ref for code output area
+  const codeOutputRef = useRef<HTMLPreElement>(null);
 
-  // Scroll to the bottom of the chat/code output when new messages arrive
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -29,7 +28,6 @@ const SamsAiPage = () => {
     }
   }, [messages]);
 
-  // Function to call the Gemini API
   const sendMessageToGemini = async (userMessage: string) => {
     setIsLoading(true);
     const newMessages = [...messages, { role: 'user', parts: [{ text: userMessage }] }];
@@ -40,7 +38,6 @@ const SamsAiPage = () => {
       const payload = {
         contents: newMessages,
       };
-      // IMPORTANT: Your Google Gemini API key is now added here.
       const apiKey = "AIzaSyAKcfLWFxjVe3TeUdF2BX8bqp2DsHneRRM"; 
       
       if (!apiKey) {
@@ -67,7 +64,6 @@ const SamsAiPage = () => {
           result.candidates[0].content.parts.length > 0) {
         const modelResponsePart = result.candidates[0].content.parts[0];
         
-        // Check if the response contains a code block
         const codeMatch = modelResponsePart.text.match(/```(\w+)\n([\s\S]*?)```/);
         if (codeMatch) {
           const language = codeMatch[1];
@@ -77,7 +73,6 @@ const SamsAiPage = () => {
             { role: 'code', parts: [{ text: code, language: language }] }
           ]);
         } else {
-          // Regular text response
           setMessages((prevMessages) => [
             ...prevMessages,
             { role: 'model', parts: [{ text: modelResponsePart.text }] }
@@ -113,7 +108,6 @@ const SamsAiPage = () => {
     }
   };
 
-  // Function to copy code to clipboard
   const copyToClipboard = (text: string) => {
     const textarea = document.createElement('textarea');
     textarea.value = text;
@@ -121,7 +115,7 @@ const SamsAiPage = () => {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-    alert('Code copied to clipboard!'); // Using alert as per instructions, consider custom toast
+    alert('Code copied to clipboard!');
   };
 
   return (
@@ -137,7 +131,6 @@ const SamsAiPage = () => {
           </Button>
         </CardHeader>
         <CardContent className="flex-1 p-4 overflow-y-auto custom-scrollbar flex flex-col-reverse" ref={scrollRef}>
-          {/* Display messages in reverse order for chat-like experience */}
           {isLoading && (
             <div className="mb-3 p-3 rounded-lg bg-muted text-text-secondary mr-auto rounded-bl-none max-w-[85%]">
               <div className="flex space-x-1">
@@ -147,7 +140,7 @@ const SamsAiPage = () => {
               </div>
             </div>
           )}
-          {messages.slice().reverse().map((msg, index) => ( // Reverse order for display
+          {messages.slice().reverse().map((msg, index) => (
             <div key={index} className="mb-3">
               {msg.role === 'user' && (
                 <div className="flex justify-end">

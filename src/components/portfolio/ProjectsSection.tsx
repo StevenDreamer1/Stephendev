@@ -13,7 +13,8 @@ const ProjectsSection = () => {
       bgColor: 'bg-primary/10',
       gradient: 'from-primary/20 to-primary/5',
       tags: ['Python', 'AI/ML', 'Computer Vision', 'Ethics'],
-      githubUrl: 'https://github.com/StevenDreamer1/DEEP-FAKE', // Updated GitHub URL
+      githubUrl: 'https://github.com/StevenDreamer1/DEEP-FAKE',
+      liveDemoUrl: '#', // Placeholder for Live Demo
       featured: true
     },
     {
@@ -24,7 +25,8 @@ const ProjectsSection = () => {
       bgColor: 'bg-secondary/10',
       gradient: 'from-secondary/20 to-secondary/5',
       tags: ['Java', 'Security', 'MySQL', 'Web Development'],
-      githubUrl: 'https://github.com/StevenDreamer1/Banking-Application', // Updated GitHub URL
+      githubUrl: 'https://github.com/StevenDreamer1/Banking-Application',
+      liveDemoUrl: '#', // Placeholder for Live Demo
       featured: true
     },
     {
@@ -35,8 +37,9 @@ const ProjectsSection = () => {
       bgColor: 'bg-accent/10',
       gradient: 'from-accent/20 to-accent/5',
       tags: ['Figma', 'UI/UX', 'Prototyping', 'Design Systems'],
-      githubUrl: 'https://github.com/StevenDreamer1',
-      featured: true // Changed to true to make it span two columns
+      githubUrl: 'https://github.com/StevenDreamer1', // Keep GitHub URL for design files if applicable
+      liveDemoUrl: 'https://www.figma.com/proto/U6WU7K82N9p69wc3YFRbug/Untitled?node-id=1-5', // Updated Live Demo URL
+      featured: true
     }
   ];
 
@@ -141,8 +144,10 @@ const ProjectsSection = () => {
                     variant="outline"
                     className="border-card-border hover:border-primary hover:text-primary transition-smooth group/btn"
                   >
-                    <ExternalLink className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-smooth" />
-                    <span className="text-white">live_demo()</span>
+                    <a href={project.liveDemoUrl} target="_blank" rel="noopener noreferrer"> {/* Use liveDemoUrl */}
+                      <ExternalLink className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-smooth" />
+                      <span className="text-white">live_demo()</span>
+                    </a>
                   </Button>
                 </div>
               </div>

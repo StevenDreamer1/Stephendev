@@ -7,8 +7,8 @@
 @layer base {
   :root {
     /* Core backgrounds */
-    --background: 217 70% 40%; /* Changed to #255da9 (dark blue) */
-    --foreground: 0 0% 100%; /* Changed to white for better contrast */
+    --background: 239 9% 31%; /* Changed to #495057 (dark grayish-blue) */
+    --foreground: 0 0% 100%; /* Kept white for better contrast */
 
     /* Card system */
     --card: 0 0% 100%;
@@ -31,8 +31,8 @@
     --muted-foreground: 220 9% 46%;
     
     /* Text hierarchy */
-    --text-primary: 0 0% 100%; /* Adjusted for dark background */
-    --text-secondary: 220 14% 71%; /* Adjusted for dark background */
+    --text-primary: 0 0% 100%; /* Kept white for better visibility */
+    --text-secondary: 220 14% 71%; /* Kept lighter grey for better visibility */
     --text-light: 220 14% 71%;
 
     /* Interactive states */

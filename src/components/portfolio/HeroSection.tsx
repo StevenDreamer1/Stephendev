@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, Download } from 'lucide-react'; // Import Download icon
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ParticleBackground from '@/components/animations/ParticleBackground'; // Keep ParticleBackground
@@ -79,11 +79,20 @@ const HeroSection = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <Button onClick={scrollToAbout} className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-base font-medium rounded-lg shadow-card hover:shadow-hover transition-all duration-300 group">
-            Explore My Work
-            <ArrowDown className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-smooth" />
-          </Button>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4"> {/* Added a container for buttons */}
+            <Button onClick={scrollToAbout} className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-base font-medium rounded-lg shadow-card hover:shadow-hover transition-all duration-300 group">
+              Explore My Work
+              <ArrowDown className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-smooth" />
+            </Button>
+            {/* New Download Resume Button */}
+            <Button asChild variant="outline" className="border-card-border hover:border-primary hover:text-primary transition-smooth group/btn">
+              <a href="/Stephen_Resume.pdf" download="Stephen_Resume.pdf"> {/* Link to your resume file */}
+                <Download className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-smooth" />
+                Download Resume
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
 

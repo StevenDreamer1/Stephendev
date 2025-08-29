@@ -5,6 +5,16 @@
 /* P. Stephen Portfolio Design System - Modern AI/ML Theme */
 
 @layer base {
+  /* Define the custom font here */
+  @font-face {
+    font-family: 'Balgin';
+    src: url('/fonts/Balgin-Regular.woff2') format('woff2'), /* Replace with your actual font file path */
+         url('/fonts/Balgin-Regular.woff') format('woff');  /* Add other formats if available */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* Ensures text is visible while font is loading */
+  }
+
   :root {
     /* Core backgrounds */
     --background: 0 0% 10%; /* Changed to #191919 (very dark grey) */
@@ -112,7 +122,6 @@
   }
 
   body {
-    /* Apply the new background and foreground colors */
     @apply bg-background text-foreground font-sans scroll-smooth;
   }
 

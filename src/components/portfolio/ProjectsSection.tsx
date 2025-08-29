@@ -13,7 +13,7 @@ const ProjectsSection = () => {
       bgColor: 'bg-primary/10',
       gradient: 'from-primary/20 to-primary/5',
       tags: ['Python', 'AI/ML', 'Computer Vision', 'Ethics'],
-      githubUrl: 'https://github.com/StevenDreamer1',
+      githubUrl: 'https://github.com/StevenDreamer1/DEEP-FAKE', // Updated GitHub URL
       featured: true
     },
     {

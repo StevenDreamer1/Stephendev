@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, ArrowDown, Download } from 'lucide-react'; // Import Download icon
+import { Github, Linkedin, Mail, ArrowDown, Download, Bot } from 'lucide-react'; // Import Bot icon
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import ParticleBackground from '@/components/animations/ParticleBackground'; // Keep ParticleBackground
@@ -77,6 +77,11 @@ const HeroSection = () => {
                 <link.icon size={20} />
               </a>
             ))}
+            {/* New SAMS.ai text beside email icon */}
+            <div className="flex items-center space-x-2 text-accent text-2xl md:text-3xl font-bold">
+              <Bot className="w-6 h-6" />
+              <span>SAMS.ai</span>
+            </div>
           </div>
 
           {/* CTA Buttons */}

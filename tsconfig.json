@@ -5,9 +5,9 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": ".", // Explicitly define base URL
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"] // Explicitly define alias path
     },
     "noImplicitAny": false,
     "noUnusedParameters": false,

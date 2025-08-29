@@ -1,6 +1,6 @@
 import React from 'react';
-import ParticleBackground from '@/components/animations/ParticleBackground'; // Removed explicit .tsx extension
-import { ArrowDown } from 'lucide-react';
+import ParticleBackground from '../components/animations/ParticleBackground'; // Corrected to use direct relative path
+import { ArrowDown, Bot } from 'lucide-react'; // Import Bot icon
 
 const MainEntryPage = () => {
   const scrollToContent = () => {
@@ -8,6 +8,10 @@ const MainEntryPage = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const navigateToSamsAi = () => {
+    window.location.href = '/sams-ai';
   };
 
   return (
@@ -30,7 +34,14 @@ const MainEntryPage = () => {
             Execute Command
             <ArrowDown className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-smooth" />
           </button>
-          <span className="text-accent text-xl font-bold">SAMS.ai</span> {/* SAMS.ai text */}
+          <Button 
+            variant="ghost" 
+            onClick={navigateToSamsAi} 
+            className="flex items-center space-x-2 text-accent text-xl font-bold hover:text-primary transition-colors duration-300"
+          >
+            <Bot className="w-5 h-5" />
+            <span>SAMS.ai</span>
+          </Button>
         </div>
       </div>
 

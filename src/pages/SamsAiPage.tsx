@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Send, MessageSquare, Code, Terminal, X } from 'lucide-react';
-import { Button } from '@/components/ui/button'; // Keep alias for UI components
-import { Textarea } from '@/components/ui/textarea'; // Corrected typo: removed 's' after Textarea
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'; // Keep alias for UI components
-import { ScrollArea } from '@/components/ui/scroll-area'; // Keep alias for UI components
-import ParticleBackground from '../components/animations/ParticleBackground'; // Explicit relative path
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import ParticleBackground from '../components/animations/ParticleBackground'; // Corrected to use direct relative path
 
 // Define the chat message type
 interface ChatMessage {

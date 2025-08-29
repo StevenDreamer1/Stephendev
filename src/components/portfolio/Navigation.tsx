@@ -5,15 +5,15 @@ import { Bot } from 'lucide-react'; // Import Bot icon
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('home');
   const navItems = [{
-    id: 'home',
-    label: 'Home',
-    path: '/' // Link to the main entry page
-  }, {
     id: 'sams-ai', // New ID for SAMS.ai
     label: 'SAMS.ai', // New label
     path: '/sams-ai', // New path for the full-screen chatbot page
     icon: Bot, // Icon for SAMS.ai
     special: true // Mark as special for styling
+  }, {
+    id: 'home',
+    label: 'Home',
+    path: '/' // Link to the main entry page
   }, {
     id: 'about',
     label: 'About',

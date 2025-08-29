@@ -19,17 +19,13 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Add this optimization block for three.js
   optimizeDeps: {
     include: ['three'],
   },
   build: {
     rollupOptions: {
-      // Explicitly externalize 'three' so Rollup does NOT try to bundle it.
-      // It will be loaded globally via the CDN script in index.html.
       external: ['three'],
       output: {
-        // Map 'three' import to the global THREE object provided by the CDN.
         globals: {
           three: 'THREE',
         },

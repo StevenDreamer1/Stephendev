@@ -19,48 +19,48 @@
 
   :root {
     /* Core backgrounds */
-    --background: 0 0% 10%; /* Changed to #191919 (very dark grey) */
-    --foreground: 0 0% 100%; /* Kept white for better contrast */
+    --background: 0 0% 10%; /* Very dark grey for code theme */
+    --foreground: 0 0% 90%; /* Light grey for default text */
 
     /* Card system */
-    --card: 0 0% 18%; /* Darker card background for contrast */
-    --card-foreground: 0 0% 100%; /* White text on cards */
-    --card-border: 220 13% 30%; /* Lighter border for contrast */
+    --card: 0 0% 15%; /* Slightly lighter dark grey for cards */
+    --card-foreground: 0 0% 90%; /* Light grey text on cards */
+    --card-border: 220 13% 25%; /* Subtle border for cards */
 
-    /* AI/ML Brand colors */
-    --primary: 246 58% 54%; /* Deep blue */
+    /* AI/ML Brand colors - Adjusted for code theme */
+    --primary: 200 80% 60%; /* Brighter blue for primary actions/highlights */
     --primary-foreground: 0 0% 100%;
-    --primary-light: 246 58% 84%;
+    --primary-light: 200 80% 80%;
 
-    --secondary: 280 60% 65%; /* Purple */
+    --secondary: 280 60% 70%; /* Brighter purple */
     --secondary-foreground: 0 0% 100%;
     
-    --accent: 158 64% 52%; /* Green */
+    --accent: 120 60% 60%; /* Brighter green */
     --accent-foreground: 0 0% 100%;
 
     /* Neutral tones */
-    --muted: 220 13% 25%; /* Darker muted background */
-    --muted-foreground: 220 9% 70%; /* Lighter muted text */
+    --muted: 0 0% 20%; /* Darker muted background */
+    --muted-foreground: 0 0% 70%; /* Lighter muted text */
     
     /* Text hierarchy */
-    --text-primary: 0 0% 100%; /* White for primary text */
-    --text-secondary: 220 14% 71%; /* Lighter grey for secondary text */
-    --text-light: 220 14% 71%;
+    --text-primary: 0 0% 95%; /* Near white for main headings */
+    --text-secondary: 0 0% 75%; /* Lighter grey for secondary text */
+    --text-light: 0 0% 60%; /* Even lighter grey for subtle text */
 
     /* Interactive states */
-    --border: 220 13% 30%; /* Lighter border for contrast */
-    --input: 220 13% 30%; /* Lighter input border */
-    --ring: 246 58% 54%;
+    --border: 0 0% 25%; /* Darker border for inputs/elements */
+    --input: 0 0% 20%; /* Darker input background */
+    --ring: 200 80% 60%; /* Ring color matches primary */
 
     /* AI-themed gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(246 58% 54%), hsl(280 60% 65%), hsl(158 64% 52%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 18%), hsl(0 0% 25%)); /* Darker card gradient */
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 15%), hsl(0 0% 10%)); /* Darker subtle gradient */
+    --gradient-hero: linear-gradient(135deg, hsl(200 80% 40%), hsl(280 60% 40%), hsl(120 60% 40%)); /* Darker, vibrant gradients */
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 15%), hsl(0 0% 20%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 12%), hsl(0 0% 10%));
 
     /* Shadows */
-    --shadow-card: 0 4px 20px -2px hsl(246 58% 54% / 0.08);
-    --shadow-hover: 0 8px 30px -4px hsl(246 58% 54% / 0.15);
-    --shadow-glow: 0 0 40px hsl(246 58% 54% / 0.2);
+    --shadow-card: 0 4px 20px -2px hsl(200 80% 60% / 0.08);
+    --shadow-hover: 0 8px 30px -4px hsl(200 80% 60% / 0.15);
+    --shadow-glow: 0 0 40px hsl(200 80% 60% / 0.2);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -70,51 +70,51 @@
 
     --sidebar-background: 0 0% 15%; /* Adjusted for dark theme */
     --sidebar-foreground: 0 0% 90%; /* Adjusted for dark theme */
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 3.7% 20%; /* Adjusted for dark theme */
+    --sidebar-primary: 200 80% 60%; /* Adjusted for dark theme */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 20%; /* Adjusted for dark theme */
     --sidebar-accent-foreground: 0 0% 90%; /* Adjusted for dark theme */
-    --sidebar-border: 220 13% 30%; /* Adjusted for dark theme */
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-border: 0 0% 25%; /* Adjusted for dark theme */
+    --sidebar-ring: 200 80% 60%;
   }
 
   .dark {
-    /* Keep dark theme variables consistent if a dark mode toggle is implemented */
-    --background: 222.2 84% 4.9%; 
-    --foreground: 210 40% 98%;
+    /* Keeping dark theme variables consistent, but they should now largely match :root */
+    --background: 0 0% 10%;
+    --foreground: 0 0% 90%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 90%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 90%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 200 80% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 280 60% 70%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 120 60% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.8% 30.6%; /* Keeping original destructive */
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --border: 0 0% 25%;
+    --input: 0 0% 20%;
+    --ring: 200 80% 60%;
+    --sidebar-background: 0 0% 15%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 200 80% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 0 0% 20%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 25%;
+    --sidebar-ring: 200 80% 60%;
   }
 }
 
@@ -124,7 +124,8 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans scroll-smooth;
+    /* Apply the new background and foreground colors and default to mono font */
+    @apply bg-background text-foreground font-mono scroll-smooth;
   }
 
   /* Modern Portfolio Styles */

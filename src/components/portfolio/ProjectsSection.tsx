@@ -24,7 +24,7 @@ const ProjectsSection = () => {
       bgColor: 'bg-secondary/10',
       gradient: 'from-secondary/20 to-secondary/5',
       tags: ['Java', 'Security', 'MySQL', 'Web Development'],
-      githubUrl: 'https://github.com/StevenDreamer1',
+      githubUrl: 'https://github.com/StevenDreamer1/Banking-Application', // Updated GitHub URL
       featured: true
     },
     {

@@ -55,7 +55,7 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
 				mono: ['JetBrains Mono', 'monospace'],
-				balgin: ['Balgin', 'sans-serif'] // Added Balgin font family
+				balgin: ['Balgin', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -78,11 +78,51 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'bounce-slow': {
+					'0%, 100%': {
+						transform: 'translateY(-10%)'
+					},
+					'50%': {
+						transform: 'translateY(0)'
+					}
+				},
+				'typewriter': {
+					'to': {
+						width: '100%'
+					}
+				},
+				'blink-caret': {
+					'from, to': { borderColor: 'transparent' },
+					'50%': { borderColor: 'green-400' }
+				},
+				'fade-in-scale': {
+					'0%': { opacity: '0', transform: 'scale(0.95)' },
+					'100%': { opacity: '1', transform: 'scale(1)' }
+				},
+				'bounce-dot': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-50%)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in-up': 'fade-in-up 1s ease-out forwards',
+				'bounce-slow': 'bounce-slow 2s infinite',
+				'typewriter': 'typewriter 3s steps(40, end) forwards, blink-caret .75s step-end infinite',
+				'fade-in-scale': 'fade-in-scale 0.3s ease-out forwards',
+				'bounce-dot': 'bounce-dot 1s infinite'
 			}
 		}
 	},

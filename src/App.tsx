@@ -3,10 +3,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainEntryPage from "@/pages/MainEntryPage"; // Adjusted import path to use alias
-import Index from "@/pages/Index"; // Adjusted import path to use alias
-import NotFound from "@/pages/NotFound"; // Adjusted import path to use alias
-import ChatbotWidget from "@/components/chatbot/ChatbotWidget"; // Adjusted import path to use alias
+// Using explicit relative paths from src/ for maximum compatibility
+import MainEntryPage from "../src/pages/MainEntryPage"; 
+import Index from "../src/pages/Index";
+import NotFound from "../src/pages/NotFound";
+import SamsAiPage from "../src/pages/SamsAiPage";
 
 const queryClient = new QueryClient();
 
@@ -26,10 +27,9 @@ const App = () => (
               </>
             } 
           />
+          <Route path="/sams-ai" element={<SamsAiPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {/* Render the ChatbotWidget outside of Routes so it's always present */}
-        <ChatbotWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

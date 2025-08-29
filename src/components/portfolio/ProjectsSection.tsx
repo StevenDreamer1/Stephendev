@@ -67,14 +67,14 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-20 bg-background">
+    <section id="projects" ref={sectionRef} className="py-20 bg-background font-mono"> {/* Apply monospace font */}
       <div className="max-w-6xl mx-auto px-6">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-            Featured Projects
+            <span className="text-primary">Featured</span> <span className="text-secondary">Projects</span>
           </h2>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-            A showcase of my work in AI/ML development and UI/UX design
+            <span className="text-accent"># A showcase of my work in AI/ML development and UI/UX design</span>
           </p>
         </div>
 
@@ -98,11 +98,11 @@ const ProjectsSection = () => {
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-text-primary group-hover:text-primary transition-smooth">
-                        {project.title}
+                        <span className="text-blue-400">project</span>.<span className="text-white">name</span> = <span className="text-orange-400">"{project.title}"</span>;
                       </h3>
                       {project.featured && (
                         <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mt-2">
-                          Featured Project
+                          <span className="text-yellow-400">status</span> = <span className="text-white">"Featured"</span>;
                         </span>
                       )}
                     </div>
@@ -110,7 +110,7 @@ const ProjectsSection = () => {
                 </div>
 
                 <p className="text-text-secondary leading-relaxed mb-6 text-lg">
-                  {project.description}
+                  <span className="text-purple-400"># Description:</span> {project.description}
                 </p>
 
                 {/* Tags */}
@@ -120,7 +120,7 @@ const ProjectsSection = () => {
                       key={tagIndex}
                       className="px-3 py-1 bg-muted text-text-secondary text-sm font-medium rounded-lg border border-card-border"
                     >
-                      {tag}
+                      <span className="text-green-400">tag</span>: <span className="text-white">"{tag}"</span>
                     </span>
                   ))}
                 </div>
@@ -133,7 +133,7 @@ const ProjectsSection = () => {
                   >
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                       <Github className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-smooth" />
-                      View Code
+                      <span className="text-white">view_code()</span>
                     </a>
                   </Button>
                   
@@ -142,7 +142,7 @@ const ProjectsSection = () => {
                     className="border-card-border hover:border-primary hover:text-primary transition-smooth group/btn"
                   >
                     <ExternalLink className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-smooth" />
-                    Live Demo
+                    <span className="text-white">live_demo()</span>
                   </Button>
                 </div>
               </div>

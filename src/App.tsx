@@ -3,11 +3,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// Using explicit relative paths from src/ for maximum compatibility
-import MainEntryPage from "../src/pages/MainEntryPage"; 
-import Index from "../src/pages/Index";
-import NotFound from "../src/pages/NotFound";
-import SamsAiPage from "../src/pages/SamsAiPage";
+// Corrected to use explicit relative paths from src/App.tsx
+import MainEntryPage from "./pages/MainEntryPage"; 
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import SamsAiPage from "./pages/SamsAiPage";
+import ChatbotWidget from "./components/chatbot/ChatbotWidget"; // Also correct relative path for ChatbotWidget
 
 const queryClient = new QueryClient();
 

@@ -1,5 +1,6 @@
 import { Code, Database, Palette, Brain, BookOpen, GraduationCap } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import React, { useEffect, useRef, useState } from 'react';
 
 const AboutSection = () => {
   const skills = [
@@ -37,10 +38,36 @@ const AboutSection = () => {
     'Spyder', 'Google Colab', 'VS Code', 'Figma', 'Kali Linux'
   ];
 
+  // State and ref for intersection observer
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Disconnect after it's visible once
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="about" className="py-20 bg-gradient-subtle">
+    <section id="about" ref={sectionRef} className="py-20 bg-gradient-subtle">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
             About Me
           </h2>
@@ -51,7 +78,10 @@ const AboutSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           {/* Education Card */}
-          <Card className="p-8 shadow-card hover:shadow-hover transition-spring border-card-border">
+          <Card 
+            className={`p-8 shadow-card hover:shadow-hover transition-spring border-card-border transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '100ms' }}
+          >
             <div className="flex items-center mb-6">
               <div className="p-3 bg-primary/10 rounded-lg mr-4">
                 <GraduationCap className="w-8 h-8 text-primary" />
@@ -74,7 +104,10 @@ const AboutSection = () => {
           </Card>
 
           {/* Certifications Card */}
-          <Card className="p-8 shadow-card hover:shadow-hover transition-spring border-card-border">
+          <Card 
+            className={`p-8 shadow-card hover:shadow-hover transition-spring border-card-border transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '200ms' }}
+          >
             <div className="flex items-center mb-6">
               <div className="p-3 bg-secondary/10 rounded-lg mr-4">
                 <BookOpen className="w-8 h-8 text-secondary" />
@@ -97,10 +130,14 @@ const AboutSection = () => {
 
         {/* Skills Grid */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold text-text-primary text-center mb-12">Technical Skills</h3>
+          <h3 className={`text-3xl font-bold text-text-primary text-center mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>Technical Skills</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
-              <Card key={index} className="p-6 shadow-card hover:shadow-hover transition-spring border-card-border group">
+              <Card 
+                key={index} 
+                className={`p-6 shadow-card hover:shadow-hover transition-spring border-card-border group transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${index * 100 + 400}ms` }} // Staggered animation
+              >
                 <div className="flex items-center mb-4">
                   <div className={`p-3 ${skill.bgColor} rounded-lg mr-3 group-hover:scale-110 transition-spring`}>
                     <skill.icon className={`w-6 h-6 ${skill.color}`} />
@@ -120,13 +157,14 @@ const AboutSection = () => {
         </div>
 
         {/* Tools Section */}
-        <div className="text-center">
+        <div className={`text-center transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h3 className="text-2xl font-bold text-text-primary mb-8">Development Tools</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {tools.map((tool, index) => (
               <div
                 key={index}
                 className="px-4 py-2 bg-card border border-card-border rounded-full text-text-secondary font-medium shadow-card hover:shadow-hover hover:scale-105 transition-spring"
+                style={{ transitionDelay: `${index * 50 + 900}ms` }} // Staggered animation
               >
                 {tool}
               </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import ParticleBackground from '../components/animations/ParticleBackground'; // Corrected to use direct relative path
+import ParticleBackground from '@/components/animations/ParticleBackground'; // Using alias import
 import { ArrowDown, Bot } from 'lucide-react'; // Import Bot icon
 
 const MainEntryPage = () => {

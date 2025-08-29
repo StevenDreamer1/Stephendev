@@ -1,12 +1,13 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "./components/ui/toaster";
+import { Toaster as Sonner } from "./components/ui/sonner";
+import { TooltipProvider } from "./components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainEntryPage from "@/pages/MainEntryPage"; 
-import Index from "@/pages/Index";
-import NotFound from "@/pages/NotFound";
-import SamsAiPage from "@/pages/SamsAiPage";
+// Using explicit relative paths based on standard casing
+import MainEntryPage from "./pages/MainEntryPage"; 
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import SamsAiPage from "./pages/SamsAiPage";
 
 const queryClient = new QueryClient();
 

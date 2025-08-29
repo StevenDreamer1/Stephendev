@@ -32,14 +32,15 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background font-mono"> {/* Apply monospace font */}
-      <ParticleBackground />
+      <ParticleBackground /> {/* Keep ParticleBackground */}
       
       <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-12 relative z-10">
         {/* Left Column: Profile Avatar */}
         <div className="flex justify-center md:justify-end order-2 md:order-1">
-          <Avatar className="w-[400px] h-[400px] border-4 border-primary/20 shadow-glow">
+          {/* Adjusted Avatar size for responsiveness */}
+          <Avatar className="w-64 h-64 md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] border-4 border-primary/20 shadow-glow">
             <AvatarImage src="/lovable-uploads/f6ee06a3-2d2a-4d8d-872a-1e9343b82418.png" alt="Palepu Stephen" />
-            <AvatarFallback className="text-5xl font-bold bg-card text-card-foreground">
+            <AvatarFallback className="text-5xl md:text-6xl font-bold bg-card text-card-foreground">
               PS
             </AvatarFallback>
           </Avatar>

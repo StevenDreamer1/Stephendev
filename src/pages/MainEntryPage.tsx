@@ -1,6 +1,7 @@
 import React from 'react';
 import ParticleBackground from '@/components/animations/ParticleBackground'; // Using alias import
 import { ArrowDown, Bot } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const MainEntryPage = () => {
   const scrollToContent = () => {

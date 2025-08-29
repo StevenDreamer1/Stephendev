@@ -1,6 +1,10 @@
-import { Mail, Linkedin, Github, Send, MapPin, Calendar } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Card } from '@/components/ui/card';
+import React, { useEffect, useRef, useState } from 'react';
 
 const ContactSection = () => {
   const contactInfo = [
@@ -13,132 +17,129 @@ const ContactSection = () => {
       bgColor: 'bg-primary/10'
     },
     {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      value: 'palepustephen',
-      href: 'https://linkedin.com/in/palepustephen',
+      icon: Phone,
+      label: 'Phone',
+      value: '+91 9390230262',
+      href: 'tel:+919390230262',
       color: 'text-secondary',
       bgColor: 'bg-secondary/10'
     },
     {
-      icon: Github,
-      label: 'GitHub',
-      value: 'StevenDreamer1',
-      href: 'https://github.com/StevenDreamer1',
-      color: 'text-accent',
-      bgColor: 'bg-accent/10'
-    }
-  ];
-
-  const additionalInfo = [
-    {
       icon: MapPin,
       label: 'Location',
-      value: 'India',
-      color: 'text-text-secondary'
+      value: 'Andhra Pradesh, India',
+      href: 'https://maps.google.com/?q=Andhra+Pradesh,India',
+      color: 'text-accent',
+      bgColor: 'bg-accent/10'
     },
-    {
-      icon: Calendar,
-      label: 'Graduation',
-      value: '2026',
-      color: 'text-text-secondary'
-    }
   ];
 
+  const formRef = useRef(null);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsFormVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (formRef.current) {
+      observer.observe(formRef.current);
+    }
+
+    return () => {
+      if (formRef.current) {
+        observer.unobserve(formRef.current);
+      }
+    };
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted!");
+    // In a real application, you would send this data to a backend service.
+    // For now, we'll just log it.
+    alert("Message sent! (This is a demo, no actual email was sent.)");
+  };
+
   return (
-    <section id="contact" className="py-20 bg-background">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center mb-16">
+    <section id="contact" className="py-20 bg-background font-mono"> {/* Apply monospace font */}
+      <div className="max-w-6xl mx-auto px-6">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isFormVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-            Let's Connect
+            <span className="text-primary">Contact</span> <span className="text-secondary">Me</span>
           </h2>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-            Ready to collaborate on AI/ML projects or discuss innovative design solutions? 
-            Let's create something amazing together.
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+            <span className="text-accent"># Let's connect and build something amazing together.</span>
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {/* Contact Methods */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-text-primary mb-6">Get in Touch</h3>
-            
-            {contactInfo.map((contact, index) => (
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Information */}
+          <div className={`space-y-6 transition-all duration-1000 delay-200 ${isFormVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {contactInfo.map((item, index) => (
               <Card 
                 key={index} 
-                className="p-6 shadow-card hover:shadow-hover transition-spring border-card-border group"
+                className="p-6 shadow-card hover:shadow-hover transition-spring border-card-border flex items-center group"
               >
-                <a 
-                  href={contact.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center group-hover:scale-[1.02] transition-spring"
-                >
-                  <div className={`p-3 ${contact.bgColor} rounded-lg mr-4 group-hover:scale-110 transition-spring`}>
-                    <contact.icon className={`w-6 h-6 ${contact.color}`} />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-text-primary">
-                      {contact.label}
-                    </h4>
-                    <p className="text-text-secondary group-hover:text-primary transition-smooth">
-                      {contact.value}
-                    </p>
-                  </div>
-                </a>
+                <div className={`p-3 ${item.bgColor} rounded-lg mr-4 group-hover:scale-110 transition-spring`}>
+                  <item.icon className={`w-6 h-6 ${item.color}`} />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-text-primary">{item.label}</h4>
+                  <a 
+                    href={item.href} 
+                    className="text-text-secondary hover:text-primary transition-smooth"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="text-yellow-400">value</span> = <span className="text-orange-400">"{item.value}"</span>;
+                  </a>
+                </div>
               </Card>
             ))}
           </div>
 
-          {/* Quick Info */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-text-primary mb-6">Quick Info</h3>
-            
-            <Card className="p-8 shadow-card border-card-border gradient-card">
-              <div className="space-y-6">
-                {additionalInfo.map((info, index) => (
-                  <div key={index} className="flex items-center">
-                    <info.icon className={`w-5 h-5 ${info.color} mr-3`} />
-                    <div>
-                      <span className="text-text-secondary">{info.label}: </span>
-                      <span className="text-text-primary font-medium">{info.value}</span>
-                    </div>
-                  </div>
-                ))}
-                
-                <div className="pt-4 border-t border-card-border">
-                  <p className="text-text-secondary leading-relaxed">
-                    Currently pursuing my B.Tech in Computer Science with a specialization in 
-                    <span className="text-primary font-medium"> AI & Machine Learning</span>. 
-                    Open to internships, collaborations, and exciting project opportunities.
-                  </p>
-                </div>
+          {/* Contact Form */}
+          <Card 
+            ref={formRef}
+            className={`p-8 shadow-card hover:shadow-hover transition-spring border-card-border transform ${isFormVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '400ms' }}
+          >
+            <h3 className="text-2xl font-bold text-text-primary mb-6">
+              <span className="text-blue-400">function</span> <span className="text-white">sendMessage</span>() {'{'}
+            </h3>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <Label htmlFor="name" className="text-text-secondary">
+                  <span className="text-green-400">const</span> <span className="text-white">name</span> = <span className="text-orange-400">"Your Name"</span>;
+                </Label>
+                <Input id="name" type="text" placeholder="Enter your name" className="bg-input text-foreground border-border mt-2" />
               </div>
-            </Card>
-
-            {/* CTA Button */}
-            <Card className="p-6 text-center shadow-card border-card-border bg-gradient-to-br from-primary/5 to-secondary/5">
-              <h4 className="text-xl font-semibold text-text-primary mb-4">
-                Ready to Start a Project?
-              </h4>
-              <Button
-                asChild
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 shadow-card hover:shadow-hover transition-spring group"
-              >
-                <a href="mailto:stifen0000@gmail.com">
-                  <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-smooth" />
-                  Send Message
-                </a>
+              <div>
+                <Label htmlFor="email" className="text-text-secondary">
+                  <span className="text-green-400">const</span> <span className="text-white">email</span> = <span className="text-orange-400">"your.email@example.com"</span>;
+                </Label>
+                <Input id="email" type="email" placeholder="Enter your email" className="bg-input text-foreground border-border mt-2" />
+              </div>
+              <div>
+                <Label htmlFor="message" className="text-text-secondary">
+                  <span className="text-green-400">const</span> <span className="text-white">message</span> = <span className="text-orange-400">"Your Message Here"</span>;
+                </Label>
+                <Textarea id="message" placeholder="Type your message here." rows={5} className="bg-input text-foreground border-border mt-2" />
+              </div>
+              <Button type="submit" className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-base font-medium rounded-lg shadow-card hover:shadow-hover transition-spring group">
+                <Send className="w-4 h-4 mr-2 group-hover:scale-110 transition-smooth" />
+                <span className="text-white">send_message()</span>
               </Button>
-            </Card>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center pt-12 border-t border-card-border">
-          <p className="text-text-secondary">
-            © 2024 P. Stephen. Built with passion for AI/ML and beautiful design.
-          </p>
+            </form>
+            <h3 className="text-2xl font-bold text-text-primary mt-6">{'}'}</h3>
+          </Card>
         </div>
       </div>
     </section>

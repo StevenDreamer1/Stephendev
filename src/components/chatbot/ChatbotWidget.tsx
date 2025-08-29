@@ -44,7 +44,7 @@ const ChatbotWidget = () => {
         throw new Error("Google Gemini API Key is missing. Please provide it in ChatbotWidget.tsx");
       }
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${AIzaSyAKcfLWFxjVe3TeUdF2BX8bqp2DsHneRRM}`;
 
       const response = await fetch(apiUrl, {
         method: 'POST',

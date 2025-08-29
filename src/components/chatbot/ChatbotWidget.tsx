@@ -109,7 +109,7 @@ const ChatbotWidget = () => {
       {isOpen && (
         <Card className="absolute bottom-20 right-0 w-80 md:w-96 h-[500px] bg-card shadow-xl flex flex-col border border-card-border rounded-lg overflow-hidden animate-fade-in-scale">
           <CardHeader className="bg-muted p-4 flex flex-row items-center justify-between border-b border-card-border">
-            <CardTitle className="text-lg font-bold text-text-primary">AI Assistant</CardTitle>
+            <CardTitle className="text-lg font-bold text-primary">SAMS.ai</CardTitle> {/* Changed title to SAMS.ai and color to primary */}
             <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} aria-label="Close Chatbot">
               <X className="w-5 h-5 text-text-secondary" />
             </Button>
@@ -117,7 +117,7 @@ const ChatbotWidget = () => {
           <CardContent className="flex-1 p-4 overflow-y-auto custom-scrollbar" ref={scrollRef}>
             {messages.length === 0 ? (
               <div className="text-center text-text-secondary mt-10">
-                Hi there! How can I help you today?
+                Hi there! I'm SAMS.ai, your personal AI assistant. How can I help you today?
               </div>
             ) : (
               messages.map((msg, index) => (

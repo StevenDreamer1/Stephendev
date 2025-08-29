@@ -1,5 +1,5 @@
 import React from 'react';
-import ParticleBackground from '../components/animations/ParticleBackground'; // Adjusted import path to relative
+import ParticleBackground from '@/components/animations/ParticleBackground.tsx'; // Adjusted import path to use alias with explicit extension
 import { ArrowDown } from 'lucide-react';
 
 const MainEntryPage = () => {

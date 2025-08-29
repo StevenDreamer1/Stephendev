@@ -9,7 +9,7 @@ const AboutSection = () => {
       icon: Code,
       color: 'text-primary',
       bgColor: 'bg-primary/10',
-      items: ['Python', 'Java', 'C', 'HTML', 'CSS']
+      items: ['Python', 'Java', 'C', 'HTML', 'CSS', 'TypeScript'] // Added TypeScript
     },
     {
       category: 'Data Science',
@@ -93,7 +93,7 @@ const AboutSection = () => {
             </div>
             <div className="space-y-4">
               <div>
-                <h4 className="text-lg font-medium text-text-primary">
+                <h4 className="text-lg font-medium text-text-primary}>
                   B.Tech in Computer Science & Engineering
                 </h4>
                 <p className="text-text-secondary">AI & ML Specialization</p>

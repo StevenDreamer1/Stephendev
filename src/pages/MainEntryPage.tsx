@@ -1,5 +1,5 @@
 import React from 'react';
-import ParticleBackground from '../components/animations/ParticleBackground'; // Adjusted import path
+import ParticleBackground from '@/components/animations/ParticleBackground'; // Adjusted import path to use alias
 import { ArrowDown } from 'lucide-react';
 
 const MainEntryPage = () => {
@@ -11,20 +11,22 @@ const MainEntryPage = () => {
   };
 
   return (
-    <div id="main-entry" className="relative min-h-screen flex flex-col items-center justify-center bg-background text-foreground overflow-hidden">
+    <div id="main-entry" className="relative min-h-screen flex flex-col items-center justify-center bg-background text-foreground overflow-hidden font-mono"> {/* Apply monospace font */}
       <ParticleBackground />
-      <div className="relative z-10 text-center p-8">
-        <h1 className="text-5xl md:text-7xl font-bold text-text-primary mb-6 animate-fade-in-up">
-          Welcome to my Portfolio.
+      <div className="relative z-10 text-center p-8 bg-black bg-opacity-30 rounded-lg shadow-lg border border-gray-700 animate-fade-in"> {/* Terminal-like container */}
+        <h1 className="text-3xl md:text-5xl font-bold text-green-400 mb-4 animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-r-green-400 pr-2"> {/* Code-like greeting */}
+          <span className="text-blue-400">console</span>.<span className="text-yellow-400">log</span>(<span className="text-orange-400">"Welcome to my Portfolio..."</span>);
         </h1>
-        <p className="text-xl md:text-2xl text-text-secondary mb-12 animate-fade-in-up delay-200">
-          Scroll down to explore my work.
+        <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up delay-1000"> {/* Code-like instruction */}
+          <span className="text-purple-400"># Navigate to explore further</span>
+          <br />
+          <span className="text-gray-500">{'>'}{'>'}{'>'}</span> <span className="text-white">scroll_down()</span> {/* Escaped '>' characters */}
         </p>
         <button
           onClick={scrollToContent}
           className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-medium rounded-xl shadow-card hover:shadow-hover transition-spring group animate-bounce-slow"
         >
-          Explore
+          Execute Command
           <ArrowDown className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-smooth" />
         </button>
       </div>
@@ -38,4 +40,3 @@ const MainEntryPage = () => {
 };
 
 export default MainEntryPage;
-

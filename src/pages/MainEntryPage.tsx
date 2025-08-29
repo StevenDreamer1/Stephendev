@@ -1,6 +1,6 @@
 import React from 'react';
-import ParticleBackground from '../components/animations/ParticleBackground'; // Corrected to use direct relative path
-import { ArrowDown, Bot } from 'lucide-react'; // Import Bot icon
+import ParticleBackground from '@/components/animations/ParticleBackground'; // Using alias import
+import { ArrowDown, Bot } from 'lucide-react';
 
 const MainEntryPage = () => {
   const scrollToContent = () => {
@@ -45,7 +45,6 @@ const MainEntryPage = () => {
         </div>
       </div>
 
-      {/* Visual scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
         <ArrowDown className="w-8 h-8 text-text-light" />
       </div>

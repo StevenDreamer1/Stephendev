@@ -14,20 +14,19 @@ const ParticleBackground = () => {
     const camera = useRef<any>(null);
     const renderer = useRef<any>(null);
     const particles = useRef<any>(null);
-    // const lines = useRef<any>(null); // Removed lines ref
     const particlePositions = useRef<Float32Array | null>(null);
-    const particleColors = useRef<Float32Array | null>(null); // Store particle colors
-    const numParticles = 300; // Increased particle count for a denser network
-    const particleSize = 0.8; // Slightly increased particle size
-    // const maxDistance = 90; // Removed maxDistance as lines are gone
-    const animationSpeed = 0.00005; // Slower, smoother animation speed
+    const particleColors = useRef<Float32Array | null>(null);
+    const numParticles = 300;
+    const particleSize = 0.8;
+    const animationSpeed = 0.00005;
+
+    const circles = useRef<THREE.Mesh[]>([]); // Ref to store the moving circles
 
     // Function to initialize the Three.js scene
     const initThree = useCallback(() => {
-        // Ensure THREE is available globally
         if (!window.THREE || !mountRef.current) return;
 
-        const THREE = window.THREE; // Reference the global THREE
+        const THREE = window.THREE;
 
         // Scene
         scene.current = new THREE.Scene();
@@ -39,7 +38,7 @@ const ParticleBackground = () => {
             0.1,
             1000
         );
-        camera.current.position.z = 200; // Adjusted camera position
+        camera.current.position.z = 200;
 
         // Renderer
         renderer.current = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -56,23 +55,22 @@ const ParticleBackground = () => {
             blending: THREE.AdditiveBlending,
             transparent: true,
             sizeAttenuation: true,
-            opacity: 0.7 // Make particles slightly more opaque
+            opacity: 0.7
         });
 
         const pGeometry = new THREE.BufferGeometry();
-        particlePositions.current = positions; // Store positions for animation
-        particleColors.current = colors; // Store colors for potential dynamic changes
+        particlePositions.current = positions;
+        particleColors.current = colors;
 
         for (let i = 0; i < numParticles; i++) {
             const i3 = i * 3;
-            positions[i3] = (Math.random() * 400) - 200; // x
-            positions[i3 + 1] = (Math.random() * 400) - 200; // y
-            positions[i3 + 2] = (Math.random() * 400) - 200; // z
+            positions[i3] = (Math.random() * 400) - 200;
+            positions[i3 + 1] = (Math.random() * 400) - 200;
+            positions[i3 + 2] = (Math.random() * 400) - 200;
 
-            // Subtle color variation (e.g., shades of blue/purple/white)
-            colors[i3] = Math.random() * 0.2 + 0.6; // Red component (more blue/purple)
-            colors[i3 + 1] = Math.random() * 0.2 + 0.7; // Green component
-            colors[i3 + 2] = Math.random() * 0.5 + 0.5; // Blue component (more white/light blue)
+            colors[i3] = Math.random() * 0.2 + 0.6;
+            colors[i3 + 1] = Math.random() * 0.2 + 0.7;
+            colors[i3 + 2] = Math.random() * 0.5 + 0.5;
         }
 
         pGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -81,22 +79,29 @@ const ParticleBackground = () => {
         particles.current = new THREE.Points(pGeometry, pMaterial);
         scene.current.add(particles.current);
 
-        // Removed Lines initialization
-        // const lineGeometry = new THREE.BufferGeometry();
-        // const linePositions = new Float32Array(numParticles * numParticles * 3 * 2);
-        // const lineColors = new Float32Array(numParticles * numParticles * 3 * 2);
-        // lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-        // lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+        // Moving Circles
+        const numCircles = 5; // Number of large circles
+        const circleRadius = 50; // Size of the circles
+        const circleColors = [0x4a00e0, 0x8e2de2, 0xda22ff, 0x9d50bb, 0x6e48aa]; // Shades of purple/blue
+        
+        for (let i = 0; i < numCircles; i++) {
+            const geometry = new THREE.SphereGeometry(circleRadius, 32, 32);
+            const material = new THREE.MeshBasicMaterial({
+                color: circleColors[i % circleColors.length],
+                transparent: true,
+                opacity: 0.15, // Subtle opacity
+                blending: THREE.AdditiveBlending // Blending for glow effect
+            });
+            const circle = new THREE.Mesh(geometry, material);
 
-        // const lineMaterial = new THREE.LineBasicMaterial({
-        //     vertexColors: true,
-        //     blending: THREE.AdditiveBlending,
-        //     transparent: true,
-        //     opacity: 0.8,
-        //     linewidth: 1
-        // });
-        // lines.current = new THREE.LineSegments(lineGeometry, lineMaterial);
-        // scene.current.add(lines.current);
+            // Random initial positions for circles
+            circle.position.x = (Math.random() * 800) - 400;
+            circle.position.y = (Math.random() * 800) - 400;
+            circle.position.z = (Math.random() * 400) - 200; // Keep them in the background depth
+
+            scene.current.add(circle);
+            circles.current.push(circle);
+        }
 
     }, []);
 
@@ -104,17 +109,13 @@ const ParticleBackground = () => {
     const animate = useCallback(() => {
         requestAnimationFrame(animate);
 
-        // Removed lines.current from the condition
         if (particles.current && particlePositions.current && renderer.current && camera.current && scene.current && window.THREE) {
-            const THREE = window.THREE; // Reference the global THREE
+            const THREE = window.THREE;
             const positions = particlePositions.current;
-            // Removed linePositions and lineColors as lines are gone
-            // let lineIndex = 0; // Removed lineIndex
 
             // Update particle positions
             for (let i = 0; i < numParticles; i++) {
                 const i3 = i * 3;
-                // Smoother, less erratic movement
                 positions[i3] += 0.5 * Math.sin(i * 0.05 + Date.now() * animationSpeed);
                 positions[i3 + 1] += 0.5 * Math.cos(i * 0.05 + Date.now() * animationSpeed);
                 positions[i3 + 2] += 0.5 * Math.sin(i * 0.05 + Date.now() * animationSpeed);
@@ -129,46 +130,25 @@ const ParticleBackground = () => {
             }
             particles.current.geometry.attributes.position.needsUpdate = true;
 
-            // Removed Lines update logic
-            // for (let i = 0; i < numParticles; i++) {
-            //     for (let j = i + 1; j < numParticles; j++) {
-            //         const i3 = i * 3;
-            //         const j3 = j * 3;
-            //         const dx = positions[i3] - positions[j3];
-            //         const dy = positions[i3 + 1] - positions[j3 + 1];
-            //         const dz = positions[i3 + 2] - positions[j3 + 2];
-            //         const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-            //         if (distance < maxDistance) {
-            //             const alpha = 1 - (distance / maxDistance);
-            //             linePositions[lineIndex++] = positions[i3];
-            //             linePositions[lineIndex++] = positions[i3 + 1];
-            //             linePositions[lineIndex++] = positions[i3 + 2];
-            //             linePositions[lineIndex++] = positions[j3];
-            //             linePositions[lineIndex++] = positions[j3 + 1];
-            //             linePositions[lineIndex++] = positions[j3 + 2];
-            //             lineColors[lineIndex - 6] = alpha * 0.8 + 0.2;
-            //             lineColors[lineIndex - 5] = alpha * 0.9 + 0.1;
-            //             lineColors[lineIndex - 4] = alpha * 1.0;
-            //             lineColors[lineIndex - 3] = alpha * 0.8 + 0.2;
-            //             lineColors[lineIndex - 2] = alpha * 0.9 + 0.1;
-            //             lineColors[lineIndex - 1] = alpha * 1.0;
-            //             (lines.current.material as THREE.LineBasicMaterial).opacity = alpha;
-            //         }
-            //     }
-            // }
+            // Animate circles
+            circles.current.forEach((circle, index) => {
+                // Simple sine/cosine movement for circles
+                circle.position.x += 0.5 * Math.sin(index * 0.1 + Date.now() * animationSpeed * 2);
+                circle.position.y += 0.5 * Math.cos(index * 0.1 + Date.now() * animationSpeed * 2);
+                circle.position.z += 0.1 * Math.sin(index * 0.2 + Date.now() * animationSpeed);
 
-            // Removed Lines cleanup and draw range update
-            // for (let i = lineIndex; i < linePositions.length; i++) {
-            //     linePositions[i] = 0;
-            //     lineColors[i] = 0;
-            // }
-            // (lines.current.geometry.attributes.position as THREE.BufferAttribute).needsUpdate = true;
-            // (lines.current.geometry.attributes.color as THREE.BufferAttribute).needsUpdate = true;
-            // lines.current.geometry.setDrawRange(0, lineIndex / 3);
+                // Wrap around when circles go off-screen
+                if (circle.position.x > 400) circle.position.x = -400;
+                if (circle.position.x < -400) circle.position.x = 400;
+                if (circle.position.y > 400) circle.position.y = -400;
+                if (circle.position.y < -400) circle.position.y = 400;
+                if (circle.position.z > 200) circle.position.z = -200;
+                if (circle.position.z < -200) circle.position.z = 200;
+            });
 
             // Rotate camera slightly for a dynamic feel
-            camera.current.rotation.y += 0.0003; // Slower rotation
-            camera.current.rotation.x += 0.0001; // Slower rotation
+            camera.current.rotation.y += 0.0003;
+            camera.current.rotation.x += 0.0001;
 
             renderer.current.render(scene.current, camera.current);
         }
@@ -184,7 +164,6 @@ const ParticleBackground = () => {
     }, []);
 
     useEffect(() => {
-        // Only initialize if THREE is available
         if (window.THREE) {
             initThree();
             animate();
@@ -203,7 +182,7 @@ const ParticleBackground = () => {
             camera.current = null;
             renderer.current = null;
             particles.current = null;
-            // lines.current = null; // Removed lines cleanup
+            circles.current = []; // Clear circles on cleanup
             particlePositions.current = null;
             particleColors.current = null;
         };

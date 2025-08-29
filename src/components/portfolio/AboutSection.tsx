@@ -138,17 +138,17 @@ const AboutSection = () => {
             {skills.map((skill, index) => (
               <Card 
                 key={index} 
-                className={`p-6 shadow-card hover:shadow-hover transition-spring border-card-border group flex flex-col items-center justify-center text-center transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                className={`p-6 shadow-card hover:shadow-hover transition-spring border-card-border group flex flex-col items-center text-center transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
                 style={{ transitionDelay: `${index * 100 + 400}ms` }} // Staggered animation
               >
                 <div className={`p-3 ${skill.bgColor} rounded-lg mb-4 group-hover:scale-110 transition-spring`}>
                   <skill.icon className={`w-8 h-8 ${skill.color}`} />
                 </div>
-                <h4 className="text-xl font-semibold text-text-primary mb-2">{skill.category}</h4>
-                <div className="space-y-1">
+                <h4 className="text-xl font-semibold text-text-primary mb-4">{skill.category}</h4> {/* Increased mb for category */}
+                <div className="space-y-1 text-left w-full pl-4"> {/* Align text left within card */}
                   {skill.items.map((item, itemIndex) => (
                     <div key={itemIndex} className="text-text-secondary text-sm font-medium">
-                      <span className="text-accent">const</span> {item} <span className="text-blue-400">= true;</span>
+                      <span className="text-accent">const</span> <span className="text-white">{item}</span> <span className="text-blue-400">= true;</span>
                     </div>
                   ))}
                 </div>

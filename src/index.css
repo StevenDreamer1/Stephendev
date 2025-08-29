@@ -8,8 +8,10 @@
   /* Define the custom font here */
   @font-face {
     font-family: 'Balgin';
-    src: url('/fonts/Balgin-Regular.woff2') format('woff2'), /* Replace with your actual font file path */
-         url('/fonts/Balgin-Regular.woff') format('woff');  /* Add other formats if available */
+    src: url('/fonts/Balgin-Regular.woff2') format('woff2'); /* Ensure this path and filename are EXACTLY correct */
+    /* If you have other formats, add them like this: */
+    /* src: url('/fonts/Balgin-Regular.woff2') format('woff2'), */
+    /* url('/fonts/Balgin-Regular.woff') format('woff'); */
     font-weight: normal;
     font-style: normal;
     font-display: swap; /* Ensures text is visible while font is loading */

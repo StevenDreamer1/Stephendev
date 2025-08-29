@@ -36,15 +36,14 @@ const ChatbotWidget = () => {
       const payload = {
         contents: newMessages,
       };
-      // IMPORTANT: Paste your actual Google Gemini API key here.
-      // Example: const apiKey = "YOUR_GEMINI_API_KEY_HERE";
-      const apiKey = ""; // Replace this empty string with your API Key
+      // IMPORTANT: Your Google Gemini API key is now added here.
+      const apiKey = "AIzaSyAKcfLWFxjVe3TeUdF2BX8bqp2DsHneRRM"; 
       
       if (!apiKey) {
         throw new Error("Google Gemini API Key is missing. Please provide it in ChatbotWidget.tsx");
       }
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${AIzaSyAKcfLWFxjVe3TeUdF2BX8bqp2DsHneRRM}`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
       const response = await fetch(apiUrl, {
         method: 'POST',

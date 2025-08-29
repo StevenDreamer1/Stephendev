@@ -1,6 +1,6 @@
 import React from 'react';
-import ParticleBackground from '@/components/animations/ParticleBackground'; // Using alias import
-import { ArrowDown, Bot } from 'lucide-react'; // Import Bot icon
+// import ParticleBackground from '@/components/animations/ParticleBackground'; // Temporarily removed
+import { ArrowDown, Bot } from 'lucide-react';
 
 const MainEntryPage = () => {
   const scrollToContent = () => {
@@ -15,21 +15,21 @@ const MainEntryPage = () => {
   };
 
   return (
-    <div id="main-entry" className="relative min-h-screen flex flex-col items-center justify-center bg-background text-foreground overflow-hidden font-mono"> {/* Apply monospace font */}
-      <ParticleBackground />
-      <div className="relative z-10 text-center p-8 bg-black bg-opacity-30 rounded-lg shadow-lg border border-gray-700 animate-fade-in"> {/* Terminal-like container */}
-        <h1 className="text-3xl md:text-5xl font-bold text-green-400 mb-4 animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-r-green-400 pr-2"> {/* Code-like greeting */}
+    <div id="main-entry" className="relative min-h-screen flex flex-col items-center justify-center bg-background text-foreground overflow-hidden font-mono">
+      {/* <ParticleBackground /> */} {/* Temporarily removed */}
+      <div className="relative z-10 text-center p-8 bg-black bg-opacity-30 rounded-lg shadow-lg border border-gray-700 animate-fade-in">
+        <h1 className="text-3xl md:text-5xl font-bold text-green-400 mb-4 animate-typewriter overflow-hidden whitespace-nowrap border-r-4 border-r-green-400 pr-2">
           <span className="text-blue-400">console</span>.<span className="text-yellow-400">log</span>(<span className="text-orange-400">"Welcome to my Portfolio..."</span>);
         </h1>
-        <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up delay-1000"> {/* Code-like instruction */}
+        <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up delay-1000">
           <span className="text-purple-400"># Navigate to explore further</span>
           <br />
-          <span className="text-gray-500">{'>'}{'>'}{'>'}</span> <span className="text-white">scroll_down()</span> {/* Escaped '>' characters */}
+          <span className="text-gray-500">{'>'}{'>'}{'>'}</span> <span className="text-white">scroll_down()</span>
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4"> {/* Container for button and SAMS.ai */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={scrollToContent}
-            className="bg-primary hover:bg-primary/80 text-primary-foreground px-8 py-4 text-lg font-medium rounded-xl shadow-card hover:shadow-hover transition-spring group animate-bounce-slow" // Changed hover:bg-primary/90 to hover:bg-primary/80
+            className="bg-primary hover:bg-primary/80 text-primary-foreground px-8 py-4 text-lg font-medium rounded-xl shadow-card hover:shadow-hover transition-spring group animate-bounce-slow"
           >
             Execute Command
             <ArrowDown className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-smooth" />
@@ -45,7 +45,6 @@ const MainEntryPage = () => {
         </div>
       </div>
 
-      {/* Visual scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
         <ArrowDown className="w-8 h-8 text-text-light" />
       </div>

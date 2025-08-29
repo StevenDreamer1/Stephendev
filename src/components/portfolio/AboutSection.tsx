@@ -88,17 +88,11 @@ const AboutSection = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-semibold text-text-primary">Education</h3>
-                <p className="text-text-secondary">Academic Background</p>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <h4 className="text-lg font-medium text-text-primary}>
-                  B.Tech in Computer Science & Engineering
-                </h4>
-                <p className="text-text-secondary">AI & ML Specialization</p>
-                <p className="text-text-secondary">Aditya College of Engineering</p>
-                <p className="text-primary font-medium">Expected Graduation: 2026</p>
+                <div className="space-y-1"> {/* Corrected: Wrapped p tags in a div */}
+                  <p className="text-text-secondary">AI & ML Specialization</p>
+                  <p className="text-text-secondary">Aditya College of Engineering</p>
+                  <p className="text-primary font-medium">Expected Graduation: 2026</p>
+                </div>
               </div>
             </div>
           </Card>

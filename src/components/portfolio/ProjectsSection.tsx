@@ -1,6 +1,7 @@
 import { ExternalLink, Github, Brain, Shield, Music } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import React, { useEffect, useRef, useState } from 'react';
 
 const ProjectsSection = () => {
   const projects = [
@@ -39,10 +40,36 @@ const ProjectsSection = () => {
     }
   ];
 
+  // State and ref for intersection observer
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Disconnect after it's visible once
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="projects" className="py-20 bg-background">
+    <section id="projects" ref={sectionRef} className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
             Featured Projects
           </h2>
@@ -55,9 +82,10 @@ const ProjectsSection = () => {
           {projects.map((project, index) => (
             <Card 
               key={index} 
-              className={`group relative overflow-hidden shadow-card hover:shadow-hover transition-spring border-card-border ${
+              className={`group relative overflow-hidden shadow-card hover:shadow-hover transition-spring border-card-border transform ${
                 project.featured ? 'lg:col-span-2' : ''
-              }`}
+              } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              style={{ transitionDelay: `${index * 150 + 200}ms` }} // Staggered animation
             >
               {/* Background gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-smooth`}></div>

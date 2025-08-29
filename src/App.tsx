@@ -1,15 +1,38 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// Using alias imports as configured in vite.config.ts and tsconfig.json
+import MainEntryPage from "@/pages/MainEntryPage"; 
+import Index from "@/pages/Index";
+import NotFound from "@/pages/NotFound";
+import SamsAiPage from "@/pages/SamsAiPage";
+
+const queryClient = new QueryClient();
 
 const App = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<div>Hello World from App.tsx!</div>} />
-      {/* Temporarily remove other routes for debugging */}
-      {/* <Route path="/sams-ai" element={<SamsAiPage />} /> */}
-      {/* <Route path="*" element={<NotFound />} /> */}
-    </Routes>
-  </BrowserRouter>
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route 
+            path="/" 
+            element={
+              <>
+                <MainEntryPage />
+                <Index />
+              </>
+            } 
+          />
+          <Route path="/sams-ai" element={<SamsAiPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
 );
 
 export default App;

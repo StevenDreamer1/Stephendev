@@ -1,4 +1,4 @@
-import { Briefcase, Camera, Utensils, Gamepad2, Award } from 'lucide-react';
+import { Briefcase, Camera, Gamepad2, Award } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import React, { useEffect, useRef, useState } from 'react'; // Import React hooks
 
@@ -63,14 +63,14 @@ const ExperienceSection = () => {
   }, []);
 
   return (
-    <section id="experience" ref={sectionRef} className="py-20 bg-gradient-subtle">
+    <section id="experience" ref={sectionRef} className="py-20 bg-gradient-subtle font-mono"> {/* Apply monospace font */}
       <div className="max-w-6xl mx-auto px-6">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-            Experience & Interests
+            <span className="text-primary">Experience</span> & <span className="text-secondary">Interests</span>
           </h2>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-            Professional experience and personal passions that shape my perspective
+            <span className="text-accent"># Professional experience and personal passions that shape my perspective</span>
           </p>
         </div>
 
@@ -79,7 +79,7 @@ const ExperienceSection = () => {
           <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h3 className="text-2xl font-bold text-text-primary mb-8 flex items-center">
               <Award className="w-6 h-6 text-primary mr-3" />
-              Professional Experience
+              <span className="text-blue-400">function</span> <span className="text-white">getExperience</span>() {'{'}
             </h3>
             
             <div className="space-y-6">
@@ -96,27 +96,30 @@ const ExperienceSection = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="text-xl font-semibold text-text-primary">
-                          {exp.title}
+                          <span className="text-yellow-400">role</span> = <span className="text-orange-400">"{exp.title}"</span>;
                         </h4>
                         <span className="text-primary font-medium bg-primary/10 px-3 py-1 rounded-full text-sm">
-                          {exp.year}
+                          <span className="text-green-400">year</span> = <span className="text-white">"{exp.year}"</span>;
                         </span>
                       </div>
-                      <p className="text-secondary font-medium mb-3">{exp.company}</p>
+                      <p className="text-secondary font-medium mb-3">
+                        <span className="text-blue-400">company</span> = <span className="text-orange-400">"{exp.company}"</span>;
+                      </p>
                       <p className="text-text-secondary leading-relaxed">
-                        {exp.description}
+                        <span className="text-purple-400"># Details:</span> {exp.description}
                       </p>
                     </div>
                   </div>
                 </Card>
               ))}
             </div>
+            <h3 className="text-2xl font-bold text-text-primary mt-8">{'}'}</h3>
           </div>
 
           {/* Hobbies & Interests */}
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h3 className="text-2xl font-bold text-text-primary mb-8">
-              Hobbies & Interests
+              <span className="text-blue-400">function</span> <span className="text-white">getHobbies</span>() {'{'}
             </h3>
             
             <div className="grid grid-cols-2 gap-4">
@@ -130,7 +133,7 @@ const ExperienceSection = () => {
                     <hobby.icon className={`w-8 h-8 ${hobby.color}`} />
                   </div>
                   <h4 className="text-lg font-semibold text-text-primary">
-                    {hobby.name}
+                    <span className="text-yellow-400">hobby</span>.<span className="text-white">name</span> = <span className="text-orange-400">"{hobby.name}"</span>;
                   </h4>
                 </Card>
               ))}
@@ -138,12 +141,14 @@ const ExperienceSection = () => {
 
             <div className={`mt-8 p-6 bg-card rounded-xl border border-card-border shadow-card transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <p className="text-text-secondary leading-relaxed">
-                Beyond coding and design, I find inspiration in capturing moments through 
-                <span className="text-secondary font-medium"> photography and videography</span>, 
-                staying active through <span className="text-primary font-medium">sports</span>. 
-                These diverse interests help me bring a well-rounded perspective to my technical work.
+                <span className="text-purple-400"># Beyond coding and design, I find inspiration in capturing moments through </span>
+                <span className="text-secondary font-medium">photography and videography</span>, 
+                <span className="text-purple-400"> staying active through </span>
+                <span className="text-primary font-medium">sports</span>. 
+                <span className="text-purple-400"> These diverse interests help me bring a well-rounded perspective to my technical work.</span>
               </p>
             </div>
+            <h3 className="text-2xl font-bold text-text-primary mt-8">{'}'}</h3>
           </div>
         </div>
       </div>

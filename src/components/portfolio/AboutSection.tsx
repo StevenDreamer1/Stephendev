@@ -65,14 +65,14 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 bg-gradient-subtle">
+    <section id="about" ref={sectionRef} className="py-20 bg-gradient-subtle font-mono"> {/* Apply monospace font */}
       <div className="max-w-6xl mx-auto px-6">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-            About Me
+            <span className="text-primary">About</span> <span className="text-secondary">Me</span>
           </h2>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-            Bridging the gap between artificial intelligence and beautiful user experiences
+            <span className="text-accent"># Bridging the gap between artificial intelligence and beautiful user experiences</span>
           </p>
         </div>
 
@@ -130,7 +130,9 @@ const AboutSection = () => {
 
         {/* Skills Grid */}
         <div className="mb-16">
-          <h3 className={`text-3xl font-bold text-text-primary text-center mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>Technical Skills</h3>
+          <h3 className={`text-3xl font-bold text-text-primary text-center mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <span className="text-primary">Technical</span> <span className="text-secondary">Skills</span>
+          </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
               <Card 
@@ -147,7 +149,7 @@ const AboutSection = () => {
                 <div className="space-y-2">
                   {skill.items.map((item, itemIndex) => (
                     <div key={itemIndex} className="text-text-secondary font-medium">
-                      {item}
+                      <span className="text-accent">const</span> {item} <span className="text-blue-400">= true;</span>
                     </div>
                   ))}
                 </div>
@@ -158,7 +160,9 @@ const AboutSection = () => {
 
         {/* Tools Section */}
         <div className={`text-center transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h3 className="text-2xl font-bold text-text-primary mb-8">Development Tools</h3>
+          <h3 className="text-2xl font-bold text-text-primary mb-8">
+            <span className="text-primary">Development</span> <span className="text-secondary">Tools</span>
+          </h3>
           <div className="flex flex-wrap justify-center gap-4">
             {tools.map((tool, index) => (
               <div
@@ -166,7 +170,7 @@ const AboutSection = () => {
                 className="px-4 py-2 bg-card border border-card-border rounded-full text-text-secondary font-medium shadow-card hover:shadow-hover hover:scale-105 transition-spring"
                 style={{ transitionDelay: `${index * 50 + 900}ms` }} // Staggered animation
               >
-                {tool}
+                <span className="text-yellow-400">tool</span>.<span className="text-white">name</span> = <span className="text-orange-400">"{tool}"</span>;
               </div>
             ))}
           </div>

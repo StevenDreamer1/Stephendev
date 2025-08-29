@@ -1,5 +1,5 @@
 import React from 'react';
-import ParticleBackground from '@/components/animations/ParticleBackground'; // Adjusted import path to use alias
+import ParticleBackground from '../components/animations/ParticleBackground'; // Adjusted import path to relative
 import { ArrowDown } from 'lucide-react';
 
 const MainEntryPage = () => {
@@ -22,13 +22,16 @@ const MainEntryPage = () => {
           <br />
           <span className="text-gray-500">{'>'}{'>'}{'>'}</span> <span className="text-white">scroll_down()</span> {/* Escaped '>' characters */}
         </p>
-        <button
-          onClick={scrollToContent}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-medium rounded-xl shadow-card hover:shadow-hover transition-spring group animate-bounce-slow"
-        >
-          Execute Command
-          <ArrowDown className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-smooth" />
-        </button>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4"> {/* Container for button and SAMS.ai */}
+          <button
+            onClick={scrollToContent}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-medium rounded-xl shadow-card hover:shadow-hover transition-spring group animate-bounce-slow"
+          >
+            Execute Command
+            <ArrowDown className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-smooth" />
+          </button>
+          <span className="text-accent text-xl font-bold">SAMS.ai</span> {/* SAMS.ai text */}
+        </div>
       </div>
 
       {/* Visual scroll indicator */}

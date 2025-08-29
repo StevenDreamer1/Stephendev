@@ -81,52 +81,24 @@ const ParticleBackground = () => {
 
         // Moving Tech Icons using Devicon SVG links
         const iconImageUrls = [
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
             "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
             "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg",
             "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ruby/ruby-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/svelte/svelte-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gatsby/gatsby-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rails/rails-original-wordmark.svg", // Ruby on Rails
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original.svg", // AWS
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webpack/webpack-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/babel/babel-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yarn/yarn-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg",
-            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg"
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
         ];
         const iconSize = 60; // Size of the tech icons
         const textureLoader = new THREE.TextureLoader();
 
         iconImageUrls.forEach((url, i) => {
+            // Fallback image URL for broken links
+            const fallbackUrl = `https://placehold.co/${iconSize}x${iconSize}/8e4de2/ffffff?text=Icon`;
+
             textureLoader.load(url,
                 (texture) => {
                     const geometry = new THREE.PlaneGeometry(iconSize, iconSize);
@@ -150,6 +122,29 @@ const ParticleBackground = () => {
                 undefined, // onProgress callback
                 (error) => {
                     console.error('An error occurred loading texture:', url, error);
+                    // Load fallback image if the original fails
+                    textureLoader.load(fallbackUrl,
+                        (fallbackTexture) => {
+                            const geometry = new THREE.PlaneGeometry(iconSize, iconSize);
+                            const material = new THREE.MeshBasicMaterial({
+                                map: fallbackTexture,
+                                transparent: true,
+                                opacity: 0.3,
+                                blending: THREE.AdditiveBlending,
+                                side: THREE.DoubleSide
+                            });
+                            const icon = new THREE.Mesh(geometry, material);
+                            icon.position.x = (Math.random() * 800) - 400;
+                            icon.position.y = (Math.random() * 800) - 400;
+                            icon.position.z = (Math.random() * 400) - 200;
+                            scene.current.add(icon);
+                            techIcons.current.push(icon);
+                        },
+                        undefined,
+                        (fallbackError) => {
+                            console.error('An error occurred loading fallback texture:', fallbackUrl, fallbackError);
+                        }
+                    );
                 }
             );
         });

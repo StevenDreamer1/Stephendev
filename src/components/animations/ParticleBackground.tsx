@@ -20,7 +20,7 @@ const ParticleBackground = () => {
     const particleSize = 0.8;
     const animationSpeed = 0.00005;
 
-    const circles = useRef<THREE.Mesh[]>([]); // Ref to store the moving circles
+    const techIcons = useRef<THREE.Mesh[]>([]); // Ref to store the moving tech icons
 
     // Function to initialize the Three.js scene
     const initThree = useCallback(() => {
@@ -79,29 +79,44 @@ const ParticleBackground = () => {
         particles.current = new THREE.Points(pGeometry, pMaterial);
         scene.current.add(particles.current);
 
-        // Moving Circles
-        const numCircles = 5; // Number of large circles
-        const circleRadius = 50; // Size of the circles
-        const circleColors = [0x4a00e0, 0x8e2de2, 0xda22ff, 0x9d50bb, 0x6e48aa]; // Shades of purple/blue
-        
-        for (let i = 0; i < numCircles; i++) {
-            const geometry = new THREE.SphereGeometry(circleRadius, 32, 32);
-            const material = new THREE.MeshBasicMaterial({
-                color: circleColors[i % circleColors.length],
-                transparent: true,
-                opacity: 0.15, // Subtle opacity
-                blending: THREE.AdditiveBlending // Blending for glow effect
-            });
-            const circle = new THREE.Mesh(geometry, material);
+        // Moving Tech Icons
+        const iconImageUrls = [
+            'https://placehold.co/100x100/A020F0/ffffff?text=REACT', // Placeholder for React
+            'https://placehold.co/100x100/000000/ffffff?text=NODEJS', // Placeholder for Node.js
+            'https://placehold.co/100x100/306998/ffffff?text=PYTHON', // Placeholder for Python
+            'https://placehold.co/100x100/F24E1E/ffffff?text=FIGMA', // Placeholder for Figma
+            'https://placehold.co/100x100/007ACC/ffffff?text=TYPESCRIPT' // Placeholder for TypeScript
+        ];
+        const iconSize = 60; // Size of the tech icons
+        const textureLoader = new THREE.TextureLoader();
 
-            // Random initial positions for circles
-            circle.position.x = (Math.random() * 800) - 400;
-            circle.position.y = (Math.random() * 800) - 400;
-            circle.position.z = (Math.random() * 400) - 200; // Keep them in the background depth
+        iconImageUrls.forEach((url, i) => {
+            textureLoader.load(url,
+                (texture) => {
+                    const geometry = new THREE.PlaneGeometry(iconSize, iconSize); // Use PlaneGeometry for icons
+                    const material = new THREE.MeshBasicMaterial({
+                        map: texture,
+                        transparent: true,
+                        opacity: 0.3, // Subtle opacity for background icons
+                        blending: THREE.AdditiveBlending, // Blending for glow effect
+                        side: THREE.DoubleSide // Render both sides of the plane
+                    });
+                    const icon = new THREE.Mesh(geometry, material);
 
-            scene.current.add(circle);
-            circles.current.push(circle);
-        }
+                    // Random initial positions for icons
+                    icon.position.x = (Math.random() * 800) - 400;
+                    icon.position.y = (Math.random() * 800) - 400;
+                    icon.position.z = (Math.random() * 400) - 200; // Keep them in the background depth
+
+                    scene.current.add(icon);
+                    techIcons.current.push(icon);
+                },
+                undefined, // onProgress callback
+                (error) => {
+                    console.error('An error occurred loading texture:', url, error);
+                }
+            );
+        });
 
     }, []);
 
@@ -130,20 +145,23 @@ const ParticleBackground = () => {
             }
             particles.current.geometry.attributes.position.needsUpdate = true;
 
-            // Animate circles
-            circles.current.forEach((circle, index) => {
-                // Simple sine/cosine movement for circles
-                circle.position.x += 0.5 * Math.sin(index * 0.1 + Date.now() * animationSpeed * 2);
-                circle.position.y += 0.5 * Math.cos(index * 0.1 + Date.now() * animationSpeed * 2);
-                circle.position.z += 0.1 * Math.sin(index * 0.2 + Date.now() * animationSpeed);
+            // Animate tech icons
+            techIcons.current.forEach((icon, index) => {
+                // Simple sine/cosine movement for icons
+                icon.position.x += 0.5 * Math.sin(index * 0.1 + Date.now() * animationSpeed * 2);
+                icon.position.y += 0.5 * Math.cos(index * 0.1 + Date.now() * animationSpeed * 2);
+                icon.position.z += 0.1 * Math.sin(index * 0.2 + Date.now() * animationSpeed);
 
-                // Wrap around when circles go off-screen
-                if (circle.position.x > 400) circle.position.x = -400;
-                if (circle.position.x < -400) circle.position.x = 400;
-                if (circle.position.y > 400) circle.position.y = -400;
-                if (circle.position.y < -400) circle.position.y = 400;
-                if (circle.position.z > 200) circle.position.z = -200;
-                if (circle.position.z < -200) circle.position.z = 200;
+                // Rotate icons subtly
+                icon.rotation.z += 0.001 * (index % 2 === 0 ? 1 : -1);
+
+                // Wrap around when icons go off-screen
+                if (icon.position.x > 400) icon.position.x = -400;
+                if (icon.position.x < -400) icon.position.x = 400;
+                if (icon.position.y > 400) icon.position.y = -400;
+                if (icon.position.y < -400) icon.position.y = 400;
+                if (icon.position.z > 200) icon.position.z = -200;
+                if (icon.position.z < -200) icon.position.z = 200;
             });
 
             // Rotate camera slightly for a dynamic feel
@@ -182,7 +200,7 @@ const ParticleBackground = () => {
             camera.current = null;
             renderer.current = null;
             particles.current = null;
-            circles.current = []; // Clear circles on cleanup
+            techIcons.current = []; // Clear tech icons on cleanup
             particlePositions.current = null;
             particleColors.current = null;
         };

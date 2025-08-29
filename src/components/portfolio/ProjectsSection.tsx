@@ -36,7 +36,7 @@ const ProjectsSection = () => {
       gradient: 'from-accent/20 to-accent/5',
       tags: ['Figma', 'UI/UX', 'Prototyping', 'Design Systems'],
       githubUrl: 'https://github.com/StevenDreamer1',
-      featured: false
+      featured: true // Changed to true to make it span two columns
     }
   ];
 
